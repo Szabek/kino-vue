@@ -1,15 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
+const state = {
+  sidebarShow: 'responsive',
+  sidebarMinimize: false
+}
+
+const mutations = {
+  toggleSidebarDesktop (state) {
+    const sidebarOpened = [true, 'responsive'].includes(state.sidebarShow)
+    state.sidebarShow = sidebarOpened ? false : 'responsive'
   },
-  mutations: {
+  toggleSidebarMobile (state) {
+    const sidebarClosed = [false, 'responsive'].includes(state.sidebarShow)
+    state.sidebarShow = sidebarClosed ? true : 'responsive'
   },
-  actions: {
-  },
-  modules: {
+  set (state, [variable, value]) {
+    state[variable] = value
   }
+}
+
+export default new Vuex.Store({
+  state,
+  mutations
 })
