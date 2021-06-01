@@ -10,7 +10,7 @@
         class="c-sidebar-brand-full" 
         name="logo" 
         size="custom-size" 
-        :height="35" 
+        :height="35"
         viewBox="0 0 556 134"
       />
       <CIcon 

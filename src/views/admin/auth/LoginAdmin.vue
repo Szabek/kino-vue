@@ -2,16 +2,17 @@
   <div class="c-app flex-row align-items-center">
     <CContainer>
       <CRow class="justify-content-center">
-        <CCol md="8">
+        <CCol md="4">
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
-                <CForm>
+                <CForm @submit.prevent="login">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
                   <CInput
-                    placeholder="Username"
+                    placeholder="Email"
                     autocomplete="username email"
+                    v-model="email"
                   >
                     <template #prepend-content><CIcon name="cil-user"/></template>
                   </CInput>
@@ -19,37 +20,26 @@
                     placeholder="Password"
                     type="password"
                     autocomplete="curent-password"
+                    v-model="password"
                   >
                     <template #prepend-content><CIcon name="cil-lock-locked"/></template>
                   </CInput>
                   <CRow>
                     <CCol col="6" class="text-left">
-                      <CButton color="primary" class="px-4">Login</CButton>
+                      <CButton type="submit" color="primary" class="px-4">Login</CButton>
                     </CCol>
                     <CCol col="6" class="text-right">
                       <CButton color="link" class="px-0">Forgot password?</CButton>
-                      <CButton color="link" class="d-lg-none">Register now!</CButton>
+                    </CCol>
+                  </CRow>
+                  <CRow>
+                    <CCol
+                        v-if="error != null"
+                        class="text-danger tex pt-4" >
+                      <h6>{{ error }}</h6>
                     </CCol>
                   </CRow>
                 </CForm>
-              </CCardBody>
-            </CCard>
-            <CCard
-              color="primary"
-              text-color="white"
-              class="text-center py-5 d-md-down-none"
-              body-wrapper
-            >
-              <CCardBody>
-                <h2>Sign up</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <CButton
-                  color="light"
-                  variant="outline"
-                  size="lg"
-                >
-                  Register Now!
-                </CButton>
               </CCardBody>
             </CCard>
           </CCardGroup>
@@ -61,6 +51,27 @@
 
 <script>
 export default {
-  name: 'Login'
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: null
+    }
+  },
+  methods: {
+    login () {
+      this.$store
+          .dispatch('login', {
+            email: this.email,
+            password: this.password
+          })
+          .then(() => {
+            this.$router.push({ name: 'Home' })
+          })
+          .catch(err => {
+            this.error = err.response.data.error
+          })
+    }
+  }
 }
 </script>

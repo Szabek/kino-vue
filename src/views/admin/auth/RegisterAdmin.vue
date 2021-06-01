@@ -9,8 +9,14 @@
                 <h1>Register</h1>
                 <p class="text-muted">Create your account</p>
                 <CInput
-                  placeholder="Username"
-                  autocomplete="username"
+                  placeholder="Name"
+                  autocomplete="name"
+                >
+                  <template #prepend-content><CIcon name="cil-user"/></template>
+                </CInput>
+                <CInput
+                    placeholder="Surname"
+                    autocomplete="surname"
                 >
                   <template #prepend-content><CIcon name="cil-user"/></template>
                 </CInput>
@@ -39,16 +45,14 @@
             </CCardBody>
             <CCardFooter class="p-4">
               <CRow>
-                <CCol col="6">
-                  <CButton block color="facebook">
-                    Facebook
+                <CCardBody>
+                  <h4>Already have an account?</h4>
+                  <CButton
+                      color="secondary"
+                  >
+                    Sign In
                   </CButton>
-                </CCol>
-                <CCol col="6">
-                  <CButton block color="twitter">
-                    Twitter
-                  </CButton>
-                </CCol>
+                </CCardBody>
               </CRow>
             </CCardFooter>
           </CCard>

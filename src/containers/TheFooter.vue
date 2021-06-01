@@ -6,7 +6,7 @@
     </div>
     <div class="mfs-auto">
       <span class="mr-1" target="_blank">Powered by</span>
-      <a href="https://coreui.io/vue">CoreUI for Vue</a>
+      <a href="https://github.com/Szabek">Daniel Chabowski</a>
     </div>
   </CFooter>
 </template>
