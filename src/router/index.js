@@ -59,7 +59,8 @@ const Register = () => import('@/views/admin/auth/RegisterAdmin')
 const Users = () => import('@/views/template/users/Users')
 const User = () => import('@/views/template/users/User')
 
-
+//My Views
+const Categories = () => import('@/views/Categories')
 
 const router = new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
@@ -91,6 +92,11 @@ function configRoutes () {
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
+        },
+        {
+          path: '/categories',
+          name: 'Categories',
+          component: Categories
         },
         {
           path: 'theme',

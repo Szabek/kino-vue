@@ -9,6 +9,7 @@ import router from './router'
 import store from './store'
 import CoreuiVue from '@coreui/vue'
 import axios from 'axios'
+import './axiosDefaults'
 
 import { iconsSet as icons } from './assets/icons/icons.js'
 

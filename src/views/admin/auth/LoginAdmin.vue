@@ -32,13 +32,6 @@
                       <CButton color="link" class="px-0">Forgot password?</CButton>
                     </CCol>
                   </CRow>
-                  <CRow>
-                    <CCol
-                        v-if="error != null"
-                        class="text-danger tex pt-4" >
-                      <h6>{{ error }}</h6>
-                    </CCol>
-                  </CRow>
                 </CForm>
               </CCardBody>
             </CCard>
