@@ -30,8 +30,8 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Add screening',
-        to: '/theme/colors',
+        name: 'Categories',
+        to: '/categories',
         icon: 'cil-drop'
       },
       {
