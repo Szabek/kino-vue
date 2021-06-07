@@ -31,7 +31,7 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Categories',
-        to: '/categories',
+        to: {name: "Categories"},
         icon: 'cil-drop'
       },
       {

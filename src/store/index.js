@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as auth from '@/store/modules/auth'
+import * as category from '@/store/modules/category'
 
 Vue.use(Vuex)
 
 const modules = {
     auth,
+    category
 }
 
 const state = {

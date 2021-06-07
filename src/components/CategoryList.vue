@@ -25,25 +25,7 @@
       </template>
       <template #details="{item}">
         <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          <CCardBody>
-            <CRow>
-              <CCol class="col-auto">
-                <h4>
-                  {{ item.username }}
-                </h4>
-              </CCol>
-              <CCol>
-                <DeleteWarning/>
-              </CCol>
-            </CRow>
-            <CInput
-                label="Rename Category:"
-                placeholder="New category name"
-            />
-            <CButton size="sm" color="success" class="">
-              Rename
-            </CButton>
-          </CCardBody>
+          <EditCategory/>
         </CCollapse>
       </template>
     </CDataTable>
@@ -51,11 +33,11 @@
 </template>
 
 <script>
-import DeleteWarning from "@/components/DeleteWarning";
+import EditCategory from "@/components/EditCategory";
 
 export default {
   components: {
-    DeleteWarning
+    EditCategory
   },
   props: {
     items: {

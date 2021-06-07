@@ -12,10 +12,17 @@ import axios from 'axios'
 import './axiosDefaults'
 
 import { iconsSet as icons } from './assets/icons/icons.js'
+import { ValidationProvider, extend } from 'vee-validate';
+Vue.component('ValidationProvider', ValidationProvider);
 
 Vue.config.performance = true
 Vue.use(CoreuiVue)
 Vue.prototype.$log = console.log.bind(console)
+
+extend('secret', {
+  validate: value => value === 'example',
+  message: 'This is not the magic word'
+});
 
 new Vue({
   el: '#app',
