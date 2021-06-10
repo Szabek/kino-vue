@@ -1,34 +1,24 @@
 <template>
-  <div>
+  <div class="container">
     <CRow>
-      <CCol>
-        <CRow>
-          <CCol>
-            <CInput
-                label="Category"
-                placeholder="Enter new Category"
-            />
-          </CCol>
-        </CRow>
+      <CCol class="col-12 col-sm-6">
+        <CreateCategory/>
       </CCol>
-      <CCol>
-        <TableList/>
+      <CCol class="col-12 col-sm-6">
+        <CategoryList/>
       </CCol>
     </CRow>
   </div>
 </template>
 
 <script>
-import TableList from "@/components/TableList";
+import CategoryList from "@/components/CategoryList";
+import CreateCategory from "@/components/CreateCategory";
 
 export default {
   components: {
-    TableList
-  },
-  data() {
-    return {
-      category: ''
-    }
+    CategoryList,
+    CreateCategory
   },
 }
 </script>
