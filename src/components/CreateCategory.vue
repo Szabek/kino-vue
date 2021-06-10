@@ -1,43 +1,50 @@
 <template>
   <div>
-    <h3 class="pt-4">Add new Category:</h3>
-    <CForm @submit.prevent="createCategory">
-      <CInput v-model="category.name"
-          class="pt-2"
-          placeholder="Enter new Category"
-      />
-      <CButton class="btn-pill" color="success" value="Submit" type="submit">Button</CButton>
-    </CForm>
+    <h3 class="pt-4 pb-2">Add new Category:</h3>
+    <ValidationObserver ref="form">
+      <CForm @submit.prevent="onSubmit">
+        <ValidationProvider name="Category" rules="required|alpha_spaces" v-slot="{ errors }">
+          <span class="alert-warning">{{ errors[0] }}</span>
+          <CInput v-model="category.name"
+                  placeholder="Enter new Category"
+          />
+        </ValidationProvider>
+        <CButton class="btn-pill" color="success" type="submit">ADD</CButton>
+      </CForm>
+    </ValidationObserver>
   </div>
 </template>
 
 <script>
 
-
 export default {
   data() {
     return {
-      category: this.createCategoryObject()
+      category: {}
     }
   },
   methods: {
-    createCategory() {
-      this.$store
-          .dispatch('createCategory', this.category)
-          .then(() => {
-            console.log(localStorage.getItem('user'))
-            this.category = this.createCategoryObject()
-          })
+    onSubmit() {
+      this.$refs.form.validate().then(success => {
+        if (!success) {
+          return;
+        }
+        this.createCategory()
+        this.category = {};
+        this.$nextTick(() => {
+          this.$refs.form.reset();
+        });
+      });
     },
-    createCategoryObject() {
-      return {
-        name: '',
-      }
+    createCategory() {
+      this.$store.dispatch('category/createCategory', this.category)
     }
   }
 }
 </script>
 
 <style scoped>
-
+span {
+  display: block;
+}
 </style>

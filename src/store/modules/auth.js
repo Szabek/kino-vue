@@ -1,5 +1,6 @@
 import axios from "axios";
 import {login, logout} from "@/api/adminAuth";
+export const namespaced = true
 
 export const state = {
     user: null

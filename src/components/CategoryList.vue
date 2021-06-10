@@ -1,7 +1,7 @@
 <template>
-  <CCardBody>
+  <CCardBody v-if="categories.length">
     <CDataTable
-        :items="items"
+        :items="itemsInList"
         :fields="fields"
         column-filter
         items-per-page-select
@@ -25,7 +25,8 @@
       </template>
       <template #details="{item}">
         <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          <EditCategory/>
+          <EditCategory :id="item.id" :name="item.name" :toggled="item._toggled"/>
+
         </CCollapse>
       </template>
     </CDataTable>
@@ -34,42 +35,53 @@
 
 <script>
 import EditCategory from "@/components/EditCategory";
+import {mapState} from "vuex";
+
+const fields = [
+  {
+    key: 'name',
+    label: 'Category'
+  },
+  {
+    key: 'show_details',
+    label: '',
+    _style: 'width:1%',
+    sorter: false,
+    filter: false
+  },
+]
 
 export default {
   components: {
     EditCategory
   },
-  props: {
-    items: {
-      type: Array,
-      required: true,
-    },
-    fields: {
-      type: Array,
-      required: true,
-    },
-    details: {
-      type: Array,
-      required: false,
-    },
-    collapseDuration: {
-      type: Number,
-      required: false,
-      default: 0
+  data() {
+    return {
+      fields: fields,
+      details: [],
+      collapseDuration: 0
     }
   },
-  data() {
-    return {}
+  created() {
+    this.$store.dispatch('category/fetchCategories')
+  },
+  computed: {
+    itemsInList() {
+      return this.categories.map((item, rowId) => {
+        return {...item, rowId}
+      })
+    },
+    ...mapState({categories: state => state.category.categories})
   },
   methods: {
     toggleDetails(item) {
-      this.$set(this.items[item.id], '_toggled', !item._toggled)
+      this.$set(this.itemsInList[item.rowId], '_toggled', !item._toggled)
       this.collapseDuration = 300
       this.$nextTick(() => {
         this.collapseDuration = 0
       })
     }
-  }
+  },
 }
 </script>
 

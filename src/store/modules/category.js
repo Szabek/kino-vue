@@ -1,57 +1,52 @@
 import * as categoryApi from "@/api/categories";
 
+export const namespaced = true
+
 export const state = {
-    categories: null
+    categories: []
 }
 
 export const mutations = {
     ADD_CATEGORY(state, category) {
-        state.categories.push(category)
+        state.categories.unshift(category)
     },
     SET_CATEGORIES(state, categories) {
         state.categories = categories
     },
-    SET_CATEGORY(state, category) {
-        state.categories = category
+    UPDATE_CATEGORY(state, newCategory) {
+        const category = state.categories.find(oldCategory => oldCategory.id === newCategory.id)
+        category.name = newCategory.name
     }
 }
 
 export const actions = {
-    createCategory({ commit, dispatch }, category) {
+    createCategory({commit}, category) {
         return categoryApi.postCategory(category)
-            .then(() => {
-                commit('ADD_CATEGORY', category)
-                const notification = {
-                    type: 'success',
-                    message: 'New category has been created!'
-                }
-                dispatch('notification/add', notification, { root: true })
+            .then(response => {
+                commit('ADD_CATEGORY', response.data.data)
+                console.log(response.data.data)
             })
 
     },
-    fetchCategories({ commit }) {
+    fetchCategories({commit}) {
         return categoryApi.getCategories()
             .then(response => {
-                commit('SET_CATEGORIES', response.data)
+                commit('SET_CATEGORIES', response.data.data)
             })
     },
-    fetchCategory({ commit, getters }, id) {
-        var event = getters.getEventById(id)
+    updateCategory({commit, getters}, updatedCategory) {
+        const categoryToUpdate = getters.getCategoryById(updatedCategory.id)
 
-        if (event) {
-            commit('SET_EVENT', event)
-            return event
-        } else {
-            return categoryApi.getCategory(id)
+        if (categoryToUpdate) {
+            return categoryApi.updateCategory(updatedCategory)
                 .then(response => {
-                    commit('SET_CATEGORY', response.data)
-                    return response.data
+                    commit('UPDATE_CATEGORY', response.data.data)
                 })
         }
     }
 }
 export const getters = {
-    getEventById: state => id => {
+    getCategoryById: state => id => {
         return state.categories.find(category => category.id === id)
     }
 }
