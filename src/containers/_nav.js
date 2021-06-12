@@ -20,13 +20,19 @@ export default [
         _name: 'CSidebarNavDropdown',
         name: 'ADD NEW',
         to: '/theme/colors',
-        icon: 'cil-drop',
+        icon: 'cil-movie',
         items: [
           {
             name: 'Breadcrumbs',
             to: '/base/breadcrumbs'
           },
         ]
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Movies',
+        to: {name: "Movies"},
+        icon: 'cil-calculator'
       },
       {
         _name: 'CSidebarNavItem',
@@ -200,7 +206,7 @@ export default [
         _name: 'CSidebarNavItem',
         name: 'Widgets',
         to: '/widgets',
-        icon: 'cil-calculator',
+        icon: 'cil-',
         badge: {
           color: 'primary',
           text: 'NEW',

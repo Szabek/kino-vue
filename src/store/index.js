@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as auth from '@/store/modules/auth'
 import * as category from '@/store/modules/category'
+import * as movie from '@/store/modules/movie'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
         auth,
-        category
+        category,
+        movie
     },
 
     state: {

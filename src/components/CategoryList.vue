@@ -25,7 +25,7 @@
       </template>
       <template #details="{item}">
         <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          <EditCategory :id="item.id" :name="item.name" :toggled="item._toggled"/>
+          <CategoryEdit :id="item.id" :name="item.name" :toggled="item._toggled"/>
 
         </CCollapse>
       </template>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import EditCategory from "@/components/EditCategory";
+import CategoryEdit from "@/components/CategoryEdit";
 import {mapState} from "vuex";
 
 const fields = [
@@ -53,7 +53,7 @@ const fields = [
 
 export default {
   components: {
-    EditCategory
+    CategoryEdit
   },
   data() {
     return {
@@ -81,7 +81,7 @@ export default {
         this.collapseDuration = 0
       })
     }
-  },
+  }
 }
 </script>
 

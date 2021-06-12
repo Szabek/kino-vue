@@ -50,8 +50,8 @@ const Badges = () => import('@/views/template/notifications/Badges')
 const Modals = () => import('@/views/template/notifications/Modals')
 
 // Views - Pages
-const Page404 = () => import('@/views/template/pages/Page404')
-const Page500 = () => import('@/views/template/pages/Page500')
+const Page404 = () => import('@/views/template/codeStarusPages/Page404')
+const Page500 = () => import('@/views/template/codeStarusPages/Page500')
 const Login = () => import('@/views/admin/auth/LoginAdmin')
 const Register = () => import('@/views/admin/auth/RegisterAdmin')
 
@@ -61,6 +61,7 @@ const User = () => import('@/views/template/users/User')
 
 //My Views
 const Categories = () => import('@/views/Categories')
+const Movies = () => import('@/views/Movies')
 
 const router = new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
@@ -82,6 +83,16 @@ function configRoutes () {
       component: Login
     },
     {
+      path: '/page404',
+      name: 'page404',
+      component: Page404
+    },{
+      path: '/page500',
+      name: 'page500',
+      component: Page500
+    },
+
+    {
       path: '/',
       redirect: '/dashboard',
       name: 'Home',
@@ -92,6 +103,11 @@ function configRoutes () {
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
+        },
+        {
+          path: '/movies',
+          name: 'Movies',
+          component: Movies
         },
         {
           path: '/categories',

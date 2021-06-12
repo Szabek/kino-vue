@@ -20,6 +20,7 @@ Vue.component('ValidationObserver', ValidationObserver);
 Vue.config.performance = true
 Vue.use(CoreuiVue)
 Vue.prototype.$log = console.log.bind(console)
+Vue.prototype.$api_storage = "http://localhost:8000/storage/"
 
 new Vue({
     el: '#app',

@@ -24,12 +24,11 @@ export const actions = {
         return categoryApi.postCategory(category)
             .then(response => {
                 commit('ADD_CATEGORY', response.data.data)
-                console.log(response.data.data)
             })
 
     },
-    fetchCategories({commit}) {
-        return categoryApi.getCategories()
+    fetchCategories({commit}, page) {
+        return categoryApi.getCategories(page)
             .then(response => {
                 commit('SET_CATEGORIES', response.data.data)
             })

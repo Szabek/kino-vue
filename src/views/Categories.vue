@@ -2,7 +2,7 @@
   <div class="container">
     <CRow>
       <CCol class="col-12 col-sm-6">
-        <CreateCategory/>
+        <CategoryCreate/>
       </CCol>
       <CCol class="col-12 col-sm-6">
         <CategoryList/>
@@ -13,12 +13,12 @@
 
 <script>
 import CategoryList from "@/components/CategoryList";
-import CreateCategory from "@/components/CreateCategory";
+import CategoryCreate from "@/components/CategoryCreate";
 
 export default {
   components: {
     CategoryList,
-    CreateCategory
+    CategoryCreate
   },
 }
 </script>
