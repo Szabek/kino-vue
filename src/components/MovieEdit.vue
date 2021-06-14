@@ -1,7 +1,7 @@
 <template>
   <CCard>
     <CCardHeader>
-      <strong>Add new movie</strong>
+      <strong>Edit Movie</strong>
       <CIcon
           class="float-right"
           name="cil-calculator"
@@ -74,7 +74,7 @@
                   id="picture"
                   ref="picture"
               >
-              <label class="custom-file-label" for="picture">Selected file: {{ movie.picture ? movie.picture.name : '' }}</label>
+              <label class="custom-file-label" for="picture">Choose picture</label>
             </div>
           </ValidationProvider>
           <hr>
@@ -93,76 +93,24 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
-
 export default {
   data() {
     return {
-      movie: this.newMovieObject()
+      movie: ''
     }
-  },
-  created() {
-    this.$store.dispatch('category/fetchCategories')
   },
   methods: {
     onSubmit() {
-      this.$refs.form.validate().then(success => {
-        if (!success) {
-          return;
-        }
-        this.createMovie()
-        this.movie = this.newMovieObject()
-        this.$nextTick(() => {
-          this.$refs.form.reset();
-        });
-      });
+
+
     },
     reset() {
-      this.movie = this.newMovieObject()
-      this.$nextTick(() => {
-        this.$refs.form.reset();
-      });
-    },
-    handleFileUpload() {
-      this.movie.picture = this.$refs.picture.files[0];
-    },
-    createMovie() {
-      const formData = new FormData();
-      formData.append('title', this.movie.title)
-      formData.append('category_id', this.movie.category_id)
-      formData.append('author', this.movie.author)
-      formData.append('description', this.movie.description)
-      formData.append('trailer', this.movie.trailer)
-      formData.append('release_date', this.movie.release_date)
-      formData.append('picture', this.movie.picture)
-      console.log(formData)
-      this.$store.dispatch('movie/createMovie', formData)
-    },
-    newMovieObject() {
-      return {
-        title: '',
-        category_id: '',
-        author: '',
-        description: '',
-        trailer: '',
-        release_date: '',
-        picture: ''
-      };
+
     }
-  },
-  computed: {
-    categoriesSelect() {
-      return this.categories.map(item => {
-        return {value: item.id, label: item.name}
-      })
-    },
-    ...mapState({categories: state => state.category.categories})
-  },
+  }
 }
 </script>
 
 <style scoped>
-span {
-  display: block;
-}
+
 </style>

@@ -77,16 +77,16 @@ export default {
     ...mapState({categories: state => state.category.categories})
   },
   methods: {
+    endLoading() {
+      this.loading = false
+    },
     toggleDetails(item) {
-      this.$set(this.itemsInList[item.rowId], '_toggled', !item._toggled)
+      this.$set(this.itemsInList[item.rowId], '_toggled',!item._toggled)
       this.collapseDuration = 300
       this.$nextTick(() => {
         this.collapseDuration = 0
       })
-    },
-    endLoading() {
-      this.loading = false
-    },
+    }
   }
 }
 </script>

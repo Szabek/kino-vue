@@ -21,30 +21,15 @@
       </template>
       <template #details="{item}">
         <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          <CCardBody>
-            <CMedia :aside-image-props="{ height: 200, width: 160 }">
-              <h4>
-                {{ item.title }}
-              </h4>
-              <p class="text-muted">User since: {{ item.release_date }}</p>
-              <CButton size="sm" color="info" class="">
-                Edit
-              </CButton>
-              <CButton size="sm" color="danger" class="ml-1">
-                Delete
-              </CButton>
-            </CMedia>
-          </CCardBody>
+          <MovieShow :movie="item"/>
         </CCollapse>
       </template>
     </CDataTable>
     <div>
-      {{ page }}
-      {{ this.lastPage }}
       <CPagination
           :activePage.sync="page"
           :pages="this.lastPage"
-          size="md"
+
       />
     </div>
   </CCardBody>
@@ -52,6 +37,7 @@
 
 <script>
 import {mapState} from "vuex";
+import MovieShow from "@/components/MovieShow";
 
 const fields = [
   {
@@ -76,7 +62,9 @@ const fields = [
 ]
 
 export default {
-  components: {},
+  components: {
+    MovieShow
+  },
   data() {
     return {
       page: 1,
