@@ -27,8 +27,8 @@ export const actions = {
             })
 
     },
-    fetchCategories({commit}, page) {
-        return categoryApi.getCategories(page)
+    fetchCategories({commit}) {
+        return categoryApi.getCategories()
             .then(response => {
                 commit('SET_CATEGORIES', response.data.data)
             })

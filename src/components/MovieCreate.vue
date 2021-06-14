@@ -135,6 +135,7 @@ export default {
       formData.append('trailer', this.movie.trailer)
       formData.append('release_date', this.movie.release_date)
       formData.append('picture', this.movie.picture)
+      console.log(formData)
       this.$store.dispatch('movie/createMovie', formData)
     },
     newMovieObject() {

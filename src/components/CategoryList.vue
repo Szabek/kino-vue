@@ -1,8 +1,9 @@
 <template>
-  <CCardBody v-if="categories.length">
+  <CCardBody>
     <CDataTable
         :items="itemsInList"
         :fields="fields"
+        :loading="loading"
         column-filter
         items-per-page-select
         :items-per-page="10"
@@ -57,6 +58,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       fields: fields,
       details: [],
       collapseDuration: 0
@@ -64,6 +66,7 @@ export default {
   },
   created() {
     this.$store.dispatch('category/fetchCategories')
+        .then(this.endLoading)
   },
   computed: {
     itemsInList() {
@@ -80,7 +83,10 @@ export default {
       this.$nextTick(() => {
         this.collapseDuration = 0
       })
-    }
+    },
+    endLoading() {
+      this.loading = false
+    },
   }
 }
 </script>

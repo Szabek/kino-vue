@@ -3,7 +3,8 @@ import * as movieApi from "@/api/movies";
 export const namespaced = true
 
 export const state = {
-    movies: []
+    movies: [],
+    lastPage: 1
 }
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
     SET_MOVIES(state, movies) {
         state.movies = movies
     },
+    SET_MOVIES_LAST_PAGE(state, lastPage) {
+        state.lastPage = lastPage
+    }
 
 }
 
@@ -23,10 +27,11 @@ export const actions = {
                 commit('ADD_MOVIE', response.data.data)
             })
     },
-    fetchMovies({commit}) {
-        return movieApi.getMovies()
+    fetchMovies({commit}, {page}) {
+        return movieApi.getMovies(page)
             .then(response => {
                 commit('SET_MOVIES', response.data.data)
+                commit('SET_MOVIES_LAST_PAGE', response.data.meta.last_page)
             })
     },
 }
