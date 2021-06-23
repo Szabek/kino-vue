@@ -62,6 +62,7 @@ const User = () => import('@/views/template/users/User')
 //My Views
 const Categories = () => import('@/views/Categories')
 const Movies = () => import('@/views/Movies')
+const MoviesEdit = () => import('@/views/MoviesEdit')
 
 const router = new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
@@ -91,7 +92,6 @@ function configRoutes () {
       name: 'page500',
       component: Page500
     },
-
     {
       path: '/',
       redirect: '/dashboard',
@@ -108,6 +108,12 @@ function configRoutes () {
           path: '/movies',
           name: 'Movies',
           component: Movies
+        },
+        {
+          path: '/movies/edit/:id',
+          name: 'Movies-edit',
+          component: MoviesEdit,
+          props: true
         },
         {
           path: '/categories',

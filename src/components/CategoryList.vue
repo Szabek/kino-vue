@@ -27,7 +27,6 @@
       <template #details="{item}">
         <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
           <CategoryEdit :id="item.id" :name="item.name" :toggled="item._toggled"/>
-
         </CCollapse>
       </template>
     </CDataTable>
@@ -70,8 +69,8 @@ export default {
   },
   computed: {
     itemsInList() {
-      return this.categories.map((item, rowId) => {
-        return {...item, rowId}
+      return this.categories.map((category, rowId) => {
+        return {...category, rowId}
       })
     },
     ...mapState({categories: state => state.category.categories})
@@ -81,7 +80,7 @@ export default {
       this.loading = false
     },
     toggleDetails(item) {
-      this.$set(this.itemsInList[item.rowId], '_toggled',!item._toggled)
+      item._toggled = !item._toggled
       this.collapseDuration = 300
       this.$nextTick(() => {
         this.collapseDuration = 0

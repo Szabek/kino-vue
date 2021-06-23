@@ -74,7 +74,7 @@
                   id="picture"
                   ref="picture"
               >
-              <label class="custom-file-label" for="picture">Selected file: {{ movie.picture ? movie.picture.name : '' }}</label>
+              <label class="custom-file-label" for="picture">Selected picture: {{ movie.picture ? movie.picture.name : '' }}</label>
             </div>
           </ValidationProvider>
           <hr>
@@ -135,7 +135,6 @@ export default {
       formData.append('trailer', this.movie.trailer)
       formData.append('release_date', this.movie.release_date)
       formData.append('picture', this.movie.picture)
-      console.log(formData)
       this.$store.dispatch('movie/createMovie', formData)
     },
     newMovieObject() {

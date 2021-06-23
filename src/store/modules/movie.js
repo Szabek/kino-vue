@@ -4,7 +4,8 @@ export const namespaced = true
 
 export const state = {
     movies: [],
-    lastPage: 1
+    lastPage: 1,
+    movieToEdit: {}
 }
 
 export const mutations = {
@@ -16,8 +17,14 @@ export const mutations = {
     },
     SET_MOVIES_LAST_PAGE(state, lastPage) {
         state.lastPage = lastPage
+    },
+    SET_MOVIE_TO_EDIT(state, movie) {
+        state.movieToEdit = movie
+    },
+    UPDATE_MOVIE(state, newMovie) {
+        const movie = state.movies.find(oldMovie => oldMovie.id === newMovie.id)
+        state.movies[movie] = newMovie                                                      //TODO
     }
-
 }
 
 export const actions = {
@@ -34,4 +41,24 @@ export const actions = {
                 commit('SET_MOVIES_LAST_PAGE', response.data.meta.last_page)
             })
     },
+    fetchMovieToEdit({commit}, id) {
+        return movieApi.getMovie(id)
+            .then(response => {
+                commit('SET_MOVIE_TO_EDIT', response.data.data)
+            })
+    },
+    updateMovie({commit}, {id, updatedMovie}) {
+
+        return movieApi.updateMovie(id, updatedMovie)
+            .then(response => {
+                commit('UPDATE_MOVIE', response.data.data)
+                console.log(response.data)
+            })
+    }
+
+}
+export const getters = {
+    getMovieById: state => id => {
+        return state.movies.find(movie => movie.id === id)
+    }
 }

@@ -37,7 +37,7 @@ export const actions = {
         const categoryToUpdate = getters.getCategoryById(updatedCategory.id)
 
         if (categoryToUpdate) {
-            return categoryApi.updateCategory(updatedCategory)
+            return categoryApi.updateCategory(updatedCategory.id, updatedCategory)
                 .then(response => {
                     commit('UPDATE_CATEGORY', response.data.data)
                 })

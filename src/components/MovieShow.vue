@@ -12,13 +12,20 @@
           {{ movie.title }}
         </h4>
         <h6>
-          <a href="movie.trailer">Trailer</a>
+          <CLink
+              :href="movie.trailer"
+              target="_blank"
+          >
+            See Trailer
+          </CLink>
         </h6>
         <p class="text-muted">Release date: {{ movie.release_date }}</p>
         <p>{{movie.description}}</p>
+        <router-link :to="{ name: 'Movies-edit', params: { id: this.movie.id }}">
         <CButton size="sm" color="info" class="">
           Edit
         </CButton>
+        </router-link>
         <CButton size="sm" color="danger" class="ml-1">
           Delete
         </CButton>

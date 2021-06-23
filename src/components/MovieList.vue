@@ -3,8 +3,8 @@
     <CDataTable
         :items="itemsInList"
         :fields="fields"
-        hover
         :loading="loading"
+        hover
     >
       <template #show_details="{item, index}">
         <td class="py-2">
@@ -29,7 +29,6 @@
       <CPagination
           :activePage.sync="page"
           :pages="this.lastPage"
-
       />
     </div>
   </CCardBody>
@@ -90,8 +89,8 @@ export default {
   },
   computed: {
     itemsInList() {
-      return this.movies.map((item, rowId) => {
-        return {...item, rowId}
+      return this.movies.map((movie, rowId) => {
+        return {...movie, rowId}
       })
     },
     ...mapState({
@@ -105,7 +104,7 @@ export default {
       this.loading = false
     },
     toggleDetails(item) {
-      this.$set(this.itemsInList[item.rowId], '_toggled', !item._toggled)
+      item._toggled = !item._toggled
       this.collapseDuration = 300
       this.$nextTick(() => {
         this.collapseDuration = 0
