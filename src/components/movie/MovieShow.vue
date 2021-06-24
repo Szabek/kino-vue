@@ -20,25 +20,30 @@
           </CLink>
         </h6>
         <p class="text-muted">Release date: {{ movie.release_date }}</p>
-        <p>{{movie.description}}</p>
+        <p>{{ movie.description }}</p>
         <router-link :to="{ name: 'Movies-edit', params: { id: this.movie.id }}">
-        <CButton size="sm" color="info" class="">
-          Edit
-        </CButton>
+          <CButton size="sm" color="info" class="">
+            Edit
+          </CButton>
         </router-link>
-        <CButton size="sm" color="danger" class="ml-1">
-          Delete
-        </CButton>
+        <a href="javascript:" v-on:click="deleteMovie">
+          <CButton size="sm" color="danger" class="ml-1">
+            Delete
+          </CButton>
+        </a>
+
       </CCol>
     </CRow>
   </CCardBody>
 </template>
 
 <script>
+import {STORAGE_URL} from "@/constants";
+
 export default {
   data() {
     return {
-      imgStorage: "http://localhost:8000/storage/"          //TODO: global
+      imgStorage: STORAGE_URL
     }
   },
   props: {
@@ -47,6 +52,13 @@ export default {
       required: true,
     }
   },
+  methods: {
+    deleteMovie() {
+      if (confirm('Are you sure?')) {
+        this.$store.dispatch('movie/deleteMovie', this.movie.id)
+      }
+    }
+  }
 }
 </script>
 

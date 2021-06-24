@@ -96,7 +96,6 @@ import {mapActions, mapState} from "vuex";
 export default {
   data() {
     return {
-      imgStorage: "http://localhost:8000/storage/",
       movie: {}
     }
   },
@@ -105,7 +104,6 @@ export default {
       required: true,
     },
   },
-
   created() {
     this.fetchCategories()
     this.fetchMovieToEdit(this.id)
@@ -150,7 +148,7 @@ export default {
       formData.append('release_date', this.movie.release_date)
 
       if (this.movie.picture) {
-        formData.append('picture', this.movie.picture,  this.movie.picture.name)
+        formData.append('picture', this.movie.picture, this.movie.picture.name)
       }
       this.$store.dispatch('movie/updateMovie', {
         id: this.movie.id,

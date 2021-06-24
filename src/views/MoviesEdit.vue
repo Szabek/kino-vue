@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MovieEdit from "@/components/MovieEdit";
+import MovieEdit from "@/components/movie/MovieEdit";
 
 export default {
   name: "MoviesEdit",

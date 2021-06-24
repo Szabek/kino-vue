@@ -4,9 +4,9 @@
         :items="itemsInList"
         :fields="fields"
         :loading="loading"
+        :items-per-page="10"
         column-filter
         items-per-page-select
-        :items-per-page="10"
         hover
         sorter
         pagination
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import CategoryEdit from "@/components/CategoryEdit";
+import CategoryEdit from "@/components/category/CategoryEdit";
 import {mapState} from "vuex";
 
 const fields = [

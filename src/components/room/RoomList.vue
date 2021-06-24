@@ -4,7 +4,12 @@
         :items="itemsInList"
         :fields="fields"
         :loading="loading"
+        :items-per-page="10"
+        column-filter
+        items-per-page-select
         hover
+        sorter
+        pagination
     >
       <template #show_details="{item, index}">
         <td class="py-2">
@@ -15,41 +20,37 @@
               size="sm"
               @click="toggleDetails(item, index)"
           >
-            {{ Boolean(item._toggled) ? 'Hide' : 'Show' }}
+            {{ Boolean(item._toggled) ? 'Hide' : 'Edit' }}
           </CButton>
         </td>
       </template>
       <template #details="{item}">
         <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          <MovieShow :movie="item"/>
+          <RoomEdit
+              :id="item.id"
+              :name="item.name"
+              :seats="item.seats"
+              :toggled="item._toggled"
+          />
         </CCollapse>
       </template>
     </CDataTable>
-    <div>
-      <CPagination
-          :activePage.sync="page"
-          :pages="this.lastPage"
-      />
-    </div>
   </CCardBody>
 </template>
 
 <script>
 import {mapState} from "vuex";
-import MovieShow from "@/components/MovieShow";
+import RoomEdit from "@/components/room/RoomEdit";
 
 const fields = [
   {
-    key: 'title',
-    label: 'Title'
+    key: 'name',
+    label: 'Name'
   },
   {
-    key: 'author',
-    label: 'Author'
-  },
-  {
-    key: 'category',
-    label: 'Category'
+    key: 'seats',
+    label: 'Seats',
+    filter: false
   },
   {
     key: 'show_details',
@@ -62,11 +63,10 @@ const fields = [
 
 export default {
   components: {
-    MovieShow
+    RoomEdit
   },
   data() {
     return {
-      page: 1,
       loading: true,
       fields: fields,
       details: [],
@@ -74,30 +74,16 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('movie/fetchMovies', {page: this.page})
+    this.$store.dispatch('room/fetchRooms')
         .then(this.endLoading)
-  },
-  watch: {
-    page(newValue) {
-      if (newValue > 0 && newValue <= this.lastPage) {
-        this.loading = true
-        this.$store.dispatch('movie/fetchMovies', {
-          page: this.page
-        }).then(this.endLoading)
-      }
-    }
   },
   computed: {
     itemsInList() {
-      return this.movies.map((movie, rowId) => {
-        return {...movie, rowId}
+      return this.rooms.map((room, rowId) => {
+        return {...room, rowId}
       })
     },
-    ...mapState({
-          movies: state => state.movie.movies,
-          lastPage: state => state.movie.lastPage
-        },
-    )
+    ...mapState({rooms: state => state.room.rooms})
   },
   methods: {
     endLoading() {

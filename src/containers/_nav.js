@@ -41,6 +41,12 @@ export default [
         icon: 'cil-drop'
       },
       {
+        _name: 'CSidebarNavItem',
+        name: 'Rooms',
+        to: {name: "Rooms"},
+        icon: 'cil-speedometer'
+      },
+      {
         _name: 'CSidebarNavTitle',
         _children: ['Components']
       },

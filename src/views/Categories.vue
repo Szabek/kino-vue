@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <CContainer>
     <CRow>
       <CCol class="col-12 col-sm-6">
         <CategoryCreate/>
@@ -8,12 +8,12 @@
         <CategoryList/>
       </CCol>
     </CRow>
-  </div>
+  </CContainer>
 </template>
 
 <script>
-import CategoryList from "@/components/CategoryList";
-import CategoryCreate from "@/components/CategoryCreate";
+import CategoryList from "@/components/category/CategoryList";
+import CategoryCreate from "@/components/category/CategoryCreate";
 
 export default {
   components: {

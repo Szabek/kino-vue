@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import * as auth from '@/store/modules/auth'
 import * as category from '@/store/modules/category'
 import * as movie from '@/store/modules/movie'
+import * as room from '@/store/modules/room'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,8 @@ export default new Vuex.Store({
     modules: {
         auth,
         category,
-        movie
+        movie,
+        room
     },
 
     state: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <CContainer>
     <CRow>
       <CCol class="col-12 col-xl-6">
         <MovieCreate/>
@@ -8,12 +8,12 @@
         <MovieList/>
       </CCol>
     </CRow>
-  </div>
+  </CContainer>
 </template>
 
 <script>
-import MovieList from "@/components/MovieList";
-import MovieCreate from "@/components/MovieCreate";
+import MovieList from "@/components/movie/MovieList";
+import MovieCreate from "@/components/movie/MovieCreate";
 
 export default {
   components: {

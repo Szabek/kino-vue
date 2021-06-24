@@ -1,0 +1,1 @@
+export const STORAGE_URL = process.env.VUE_APP_STORAGE_URL;

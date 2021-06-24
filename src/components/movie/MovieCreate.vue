@@ -82,7 +82,7 @@
             <CIcon name="cil-check-circle"/>
             Submit
           </CButton>
-          <CButton type="reset" size="sm" color="danger">
+          <CButton type="reset" size="sm" color="danger" class="ml-1">
             <CIcon name="cil-ban"/>
             Reset
           </CButton>

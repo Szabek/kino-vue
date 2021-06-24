@@ -24,6 +24,10 @@ export const mutations = {
     UPDATE_MOVIE(state, newMovie) {
         const movie = state.movies.find(oldMovie => oldMovie.id === newMovie.id)
         state.movies[movie] = newMovie                                                      //TODO
+    },
+    DELETE_MOVIE(state, id) {
+        const index = state.movies.findIndex(movie => movie.id === id)
+        state.movies.splice(index, 1)
     }
 }
 
@@ -54,6 +58,18 @@ export const actions = {
                 commit('UPDATE_MOVIE', response.data.data)
                 console.log(response.data)
             })
+    },
+    deleteMovie({commit, getters}, movieId) {
+        const movieToDelete = getters.getMovieById(movieId)
+
+        if (movieToDelete) {
+            return movieApi.deleteMovie(movieId)
+                .then(commit('DELETE_MOVIE', movieId))
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+
     }
 
 }
