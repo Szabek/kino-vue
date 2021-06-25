@@ -11,7 +11,7 @@
       <ValidationObserver ref="form">
         <CForm @submit.prevent="onSubmit">
           <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="movie.title"
                 label="Movie title"
@@ -19,7 +19,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Category" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CSelect
                 :value.sync='movie.category_id'
                 :options="categoriesSelect"
@@ -28,7 +28,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Author" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="movie.author"
                 label="Author"
@@ -36,7 +36,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Description" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CTextarea
                 v-model="movie.description"
                 label="Description"
@@ -46,7 +46,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Trailer" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="movie.trailer"
                 label="Trailer"
@@ -54,7 +54,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Release date" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="movie.release_date"
                 label="Release date"
@@ -64,7 +64,7 @@
           </ValidationProvider>
 
           <ValidationProvider name="Picture" rules="image" v-slot="{ validate, errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <div class="custom-file">
               <input
                   v-on:change="handleFileUpload()"
@@ -118,10 +118,8 @@ export default {
         return {value: item.id, label: item.name}
       })
     },
-    ...mapState({
-      categories: state => state.category.categories,
-      movieToEdit: state => state.movie.movieToEdit
-    }),
+    ...mapState('category', ['categories']),
+    ...mapState('movie', ['movieToEdit'])
   },
   methods: {
     onSubmit() {
@@ -139,20 +137,9 @@ export default {
       this.movie.picture = this.$refs.picture.files[0];
     },
     createMovie() {
-      const formData = new FormData();
-      formData.append('title', this.movie.title)
-      formData.append('category_id', this.movie.category_id)
-      formData.append('author', this.movie.author)
-      formData.append('description', this.movie.description)
-      formData.append('trailer', this.movie.trailer)
-      formData.append('release_date', this.movie.release_date)
-
-      if (this.movie.picture) {
-        formData.append('picture', this.movie.picture, this.movie.picture.name)
-      }
       this.$store.dispatch('movie/updateMovie', {
         id: this.movie.id,
-        updatedMovie: formData
+        updatedMovie: this.movie
       })
     },
     ...mapActions('movie', ['fetchMovieToEdit'],),

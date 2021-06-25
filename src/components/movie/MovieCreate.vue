@@ -11,7 +11,7 @@
       <ValidationObserver ref="form">
         <CForm @submit.prevent="onSubmit" @reset.prevent="reset">
           <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="movie.title"
                 label="Movie title"
@@ -19,7 +19,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Category" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CSelect
                 :value.sync='movie.category_id'
                 label="Category"
@@ -29,7 +29,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Author" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="movie.author"
                 label="Author"
@@ -37,7 +37,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Description" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CTextarea
                 v-model="movie.description"
                 label="Description"
@@ -47,7 +47,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Trailer" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="movie.trailer"
                 label="Trailer"
@@ -55,7 +55,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Release date" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="movie.release_date"
                 label="Release date"
@@ -64,7 +64,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Picture" rules="required|image" v-slot="{ validate, errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <div class="custom-file">
               <input
                   v-on:change="handleFileUpload()"
@@ -74,7 +74,9 @@
                   id="picture"
                   ref="picture"
               >
-              <label class="custom-file-label" for="picture">Selected picture: {{ movie.picture ? movie.picture.name : '' }}</label>
+              <label class="custom-file-label" for="picture">
+                Selected picture: {{ movie.picture ? movie.picture.name : '' }}
+              </label>
             </div>
           </ValidationProvider>
           <hr>
@@ -127,15 +129,7 @@ export default {
       this.movie.picture = this.$refs.picture.files[0];
     },
     createMovie() {
-      const formData = new FormData();
-      formData.append('title', this.movie.title)
-      formData.append('category_id', this.movie.category_id)
-      formData.append('author', this.movie.author)
-      formData.append('description', this.movie.description)
-      formData.append('trailer', this.movie.trailer)
-      formData.append('release_date', this.movie.release_date)
-      formData.append('picture', this.movie.picture)
-      this.$store.dispatch('movie/createMovie', formData)
+      this.$store.dispatch('movie/createMovie', this.movie)
     },
     newMovieObject() {
       return {
@@ -155,7 +149,7 @@ export default {
         return {value: item.id, label: item.name}
       })
     },
-    ...mapState({categories: state => state.category.categories})
+    ...mapState('category', ['categories'])
   },
 }
 </script>

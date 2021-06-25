@@ -65,7 +65,7 @@ export default {
   },
   created() {
     this.$store.dispatch('category/fetchCategories')
-        .then(this.endLoading)
+        .then(() => this.loading = false)
   },
   computed: {
     itemsInList() {
@@ -73,12 +73,9 @@ export default {
         return {...category, rowId}
       })
     },
-    ...mapState({categories: state => state.category.categories})
+    ...mapState('category', ['categories'])
   },
   methods: {
-    endLoading() {
-      this.loading = false
-    },
     toggleDetails(item) {
       item._toggled = !item._toggled
       this.collapseDuration = 300

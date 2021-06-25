@@ -4,7 +4,7 @@
     <ValidationObserver ref="form">
       <CForm @submit.prevent="onSubmit">
         <ValidationProvider name="Category" rules="required|alpha_spaces" v-slot="{ errors }">
-          <span class="alert-warning">{{ errors[0] }}</span>
+          <div class="alert-warning">{{ errors[0] }}</div>
           <CInput
               v-model="category.name"
               placeholder="Enter new Category"
@@ -45,7 +45,5 @@ export default {
 </script>
 
 <style scoped>
-span {
-  display: block;
-}
+
 </style>

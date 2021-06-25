@@ -3,7 +3,7 @@
     <CRow>
       <CCol class="col-12 col-sm-6">
         <CImg
-            :src="imgStorage + movie.picture_source"
+            :src="STORAGE_URL + movie.picture_source"
             width="160"
         />
       </CCol>
@@ -26,12 +26,9 @@
             Edit
           </CButton>
         </router-link>
-        <a href="javascript:" v-on:click="deleteMovie">
-          <CButton size="sm" color="danger" class="ml-1">
-            Delete
-          </CButton>
-        </a>
-
+        <CButton size="sm" color="danger" class="ml-1" v-on:click="deleteMovie">
+          Delete
+        </CButton>
       </CCol>
     </CRow>
   </CCardBody>
@@ -43,7 +40,7 @@ import {STORAGE_URL} from "@/constants";
 export default {
   data() {
     return {
-      imgStorage: STORAGE_URL
+      STORAGE_URL: STORAGE_URL
     }
   },
   props: {

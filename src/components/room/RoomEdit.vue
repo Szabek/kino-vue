@@ -4,16 +4,16 @@
       <CCol class="col-auto">
         <h4>{{ name }}</h4>
       </CCol>
-      <a href="javascript:" v-on:click="deleteRoom">
-        <CButton size="sm" color="danger">
+      <CCol>
+        <CButton size="sm" color="danger" v-on:click="deleteRoom">
           Delete
         </CButton>
-      </a>
+      </CCol>
     </CRow>
     <ValidationObserver v-slot="{ handleSubmit }">
       <CForm @submit.prevent="handleSubmit(updateRoom)">
         <ValidationProvider name="Category" rules="required" v-slot="{ errors }">
-          <span class="alert-warning">{{ errors[0] }}</span>
+          <div class="alert-warning">{{ errors[0] }}</div>
           <CInput
               v-model="room.name"
               label="Rename Room"
@@ -21,7 +21,7 @@
           />
         </ValidationProvider>
         <ValidationProvider name="Seats" rules="required|integer" v-slot="{ errors }">
-          <span class="alert-warning">{{ errors[0] }}</span>
+          <div class="alert-warning">{{ errors[0] }}</div>
           <CInput
               v-model="room.seats"
               label="Seats number"
@@ -39,6 +39,24 @@
 <script>
 
 export default {
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    seats: {
+      required: true,
+    },
+
+    toggled: {
+      type: Boolean,
+      required: false,
+    },
+  },
   data() {
     return {
       room: {}
@@ -72,29 +90,9 @@ export default {
       }
     }
   },
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    seats: {
-      required: true,
-    },
-
-    toggled: {
-      type: Boolean,
-      required: false,
-    },
-  },
 }
 </script>
 
 <style scoped>
-span {
-  display: block;
-}
+
 </style>

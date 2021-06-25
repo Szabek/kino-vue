@@ -7,7 +7,7 @@
       <ValidationObserver ref="form">
         <CForm @submit.prevent="onSubmit" @reset.prevent="reset">
           <ValidationProvider name="Name" rules="required" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="room.name"
                 label="Room name"
@@ -15,7 +15,7 @@
             />
           </ValidationProvider>
           <ValidationProvider name="Seats" rules="required|integer" v-slot="{ errors }">
-            <span class="alert-warning">{{ errors[0] }}</span>
+            <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
                 v-model="room.seats"
                 label="Seats number"
@@ -71,7 +71,5 @@ export default {
 </script>
 
 <style scoped>
-span {
-  display: block;
-}
+
 </style>
