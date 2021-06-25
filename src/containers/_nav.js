@@ -20,7 +20,7 @@ export default [
         _name: 'CSidebarNavDropdown',
         name: 'ADD NEW',
         to: '/theme/colors',
-        icon: 'cil-drop',
+        icon: 'cil-movie',
         items: [
           {
             name: 'Breadcrumbs',
@@ -30,9 +30,21 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
+        name: 'Movies',
+        to: {name: "Movies"},
+        icon: 'cil-calculator'
+      },
+      {
+        _name: 'CSidebarNavItem',
         name: 'Categories',
         to: {name: "Categories"},
         icon: 'cil-drop'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Rooms',
+        to: {name: "Rooms"},
+        icon: 'cil-speedometer'
       },
       {
         _name: 'CSidebarNavTitle',
@@ -200,7 +212,7 @@ export default [
         _name: 'CSidebarNavItem',
         name: 'Widgets',
         to: '/widgets',
-        icon: 'cil-calculator',
+        icon: 'cil-',
         badge: {
           color: 'primary',
           text: 'NEW',

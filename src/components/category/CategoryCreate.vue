@@ -5,8 +5,9 @@
       <CForm @submit.prevent="onSubmit">
         <ValidationProvider name="Category" rules="required|alpha_spaces" v-slot="{ errors }">
           <span class="alert-warning">{{ errors[0] }}</span>
-          <CInput v-model="category.name"
-                  placeholder="Enter new Category"
+          <CInput
+              v-model="category.name"
+              placeholder="Enter new Category"
           />
         </ValidationProvider>
         <CButton class="btn-pill" color="success" type="submit">ADD</CButton>

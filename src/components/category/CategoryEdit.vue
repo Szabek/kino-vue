@@ -5,7 +5,11 @@
         <h4>{{ name }}</h4>
       </CCol>
       <CCol>
-        <DeleteWarning/>
+        <a href="javascript:" v-on:click="deleteCategory">
+          <CButton size="sm" color="danger">
+            Delete
+          </CButton>
+        </a>
       </CCol>
     </CRow>
     <ValidationObserver v-slot="{ handleSubmit }">
@@ -26,8 +30,6 @@
 </template>
 
 <script>
-import DeleteWarning from "@/components/DeleteWarning";
-
 export default {
   data() {
     return {
@@ -49,6 +51,11 @@ export default {
             this.category = this.createCategoryObject()
           })
     },
+    deleteCategory() {
+      if (confirm('Are you sure?')) {
+        this.$store.dispatch('category/deleteCategory', this.category.id)
+      }
+    },
     createCategoryObject() {
       return {
         id: this.id,
@@ -69,10 +76,7 @@ export default {
       type: Boolean,
       required: false,
     },
-  },
-  components: {
-    DeleteWarning
-  },
+  }
 }
 </script>
 

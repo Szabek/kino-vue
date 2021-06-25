@@ -1,11 +1,12 @@
 <template>
-  <CCardBody v-if="categories.length">
+  <CCardBody>
     <CDataTable
         :items="itemsInList"
         :fields="fields"
+        :loading="loading"
+        :items-per-page="10"
         column-filter
         items-per-page-select
-        :items-per-page="10"
         hover
         sorter
         pagination
@@ -25,8 +26,12 @@
       </template>
       <template #details="{item}">
         <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          <EditCategory :id="item.id" :name="item.name" :toggled="item._toggled"/>
-
+          <RoomEdit
+              :id="item.id"
+              :name="item.name"
+              :seats="item.seats"
+              :toggled="item._toggled"
+          />
         </CCollapse>
       </template>
     </CDataTable>
@@ -34,13 +39,18 @@
 </template>
 
 <script>
-import EditCategory from "@/components/EditCategory";
 import {mapState} from "vuex";
+import RoomEdit from "@/components/room/RoomEdit";
 
 const fields = [
   {
     key: 'name',
-    label: 'Category'
+    label: 'Name'
+  },
+  {
+    key: 'seats',
+    label: 'Seats',
+    filter: false
   },
   {
     key: 'show_details',
@@ -53,35 +63,40 @@ const fields = [
 
 export default {
   components: {
-    EditCategory
+    RoomEdit
   },
   data() {
     return {
+      loading: true,
       fields: fields,
       details: [],
       collapseDuration: 0
     }
   },
   created() {
-    this.$store.dispatch('category/fetchCategories')
+    this.$store.dispatch('room/fetchRooms')
+        .then(this.endLoading)
   },
   computed: {
     itemsInList() {
-      return this.categories.map((item, rowId) => {
-        return {...item, rowId}
+      return this.rooms.map((room, rowId) => {
+        return {...room, rowId}
       })
     },
-    ...mapState({categories: state => state.category.categories})
+    ...mapState({rooms: state => state.room.rooms})
   },
   methods: {
+    endLoading() {
+      this.loading = false
+    },
     toggleDetails(item) {
-      this.$set(this.itemsInList[item.rowId], '_toggled', !item._toggled)
+      item._toggled = !item._toggled
       this.collapseDuration = 300
       this.$nextTick(() => {
         this.collapseDuration = 0
       })
     }
-  },
+  }
 }
 </script>
 

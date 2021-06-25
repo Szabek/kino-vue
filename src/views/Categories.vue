@@ -1,24 +1,24 @@
 <template>
-  <div class="container">
+  <CContainer>
     <CRow>
       <CCol class="col-12 col-sm-6">
-        <CreateCategory/>
+        <CategoryCreate/>
       </CCol>
       <CCol class="col-12 col-sm-6">
         <CategoryList/>
       </CCol>
     </CRow>
-  </div>
+  </CContainer>
 </template>
 
 <script>
-import CategoryList from "@/components/CategoryList";
-import CreateCategory from "@/components/CreateCategory";
+import CategoryList from "@/components/category/CategoryList";
+import CategoryCreate from "@/components/category/CategoryCreate";
 
 export default {
   components: {
     CategoryList,
-    CreateCategory
+    CategoryCreate
   },
 }
 </script>
