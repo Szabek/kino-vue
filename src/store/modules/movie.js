@@ -23,7 +23,7 @@ export const mutations = {
     },
     UPDATE_MOVIE(state, newMovie) {
         const movie = state.movies.find(oldMovie => oldMovie.id === newMovie.id)
-        state.movies[movie] = newMovie                                                      //TODO: ten sposób nie diziała
+        state.movies[movie] = newMovie                                                      //TODO ten sposób nie diziała
     },
     DELETE_MOVIE(state, id) {
         const index = state.movies.findIndex(movie => movie.id === id)

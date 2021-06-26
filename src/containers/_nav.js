@@ -47,6 +47,12 @@ export default [
         icon: 'cil-speedometer'
       },
       {
+        _name: 'CSidebarNavItem',
+        name: 'Screenings',
+        to: {name: "Screenings"},
+        icon: 'cil-star'
+      },
+      {
         _name: 'CSidebarNavTitle',
         _children: ['Components']
       },

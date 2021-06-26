@@ -29,18 +29,11 @@ export const actions = {
             .then(response => {
                 commit('ADD_CATEGORY', response.data.data)
             })
-            .catch(error => {
-                console.log(error);
-            })
-
     },
     fetchCategories({commit}) {
         return categoryApi.getCategories()
             .then(response => {
                 commit('SET_CATEGORIES', response.data.data)
-            })
-            .catch(error => {
-                console.log(error);
             })
     },
     updateCategory({commit}, updatedCategory) {
