@@ -114,9 +114,20 @@ function configRoutes() {
                     component: () => import('@/views/Categories')
                 },
                 {
-                    path: '/screenings',
-                    name: 'Screenings',
-                    component: () => import('@/views/Screenings')
+                    path: '/screenings/add',
+                    name: 'Screenings-add',
+                    component: () => import('@/views/ScreeningsAdd')
+                },
+                {
+                    path: '/screenings/show',
+                    name: 'Screenings-show',
+                    component: () => import('@/views/ScreeningsShow')
+                },
+                {
+                    path: '/screenings/:id/edit',
+                    name: 'Screenings-edit',
+                    component: () => import('@/views/ScreeningsEdit'),
+                    props: true
                 },
                 {
                     path: 'theme',

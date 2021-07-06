@@ -6,23 +6,20 @@
         :loading="loading"
         hover
     >
-      <template #show_details="{item, index}">
+      <template #show_edit="{item}">
         <td class="py-2">
-          <CButton
-              color="primary"
-              variant="outline"
-              square
-              size="sm"
-              @click="toggleDetails(item, index)"
-          >
-            {{ Boolean(item._toggled) ? 'Hide' : 'Show' }}
-          </CButton>
+          <router-link :to="{ name: 'Screenings-edit', params: { id: item.movieId }}">
+            <CButton
+                size="sm"
+                color="primary"
+                variant="outline"
+                square
+            >
+              Edit
+            </CButton>
+          </router-link>
+
         </td>
-      </template>
-      <template #details="{item}">
-        <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          {{item}}
-        </CCollapse>
       </template>
     </CDataTable>
     <div>
@@ -45,7 +42,11 @@ export default {
       fields: [
         {
           key: 'movieTitle',
-          label: 'movie'
+          label: 'Movie'
+        },
+        {
+          key: 'movieAuthor',
+          label: 'Author'
         },
         {
           key: 'startTime',
@@ -56,7 +57,7 @@ export default {
           label: 'Price'
         },
         {
-          key: 'show_details',
+          key: 'show_edit',
           label: '',
           _style: 'width:1%',
           sorter: false,
@@ -85,9 +86,11 @@ export default {
     itemsInList() {
       return this.screenings.map((screening, rowId) => {
         return {
+          movieId: screening.movie.id,
           movieTitle: screening.movie.title,
-          price: screening.price,
+          movieAuthor: screening.movie.author,
           startTime: screening.start_time,
+          price: screening.price,
           rowId
         }
       })

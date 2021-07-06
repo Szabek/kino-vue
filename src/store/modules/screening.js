@@ -1,5 +1,6 @@
 import * as screeningApi from '@/api/screenings'
 
+
 export const namespaced = true
 
 export const state = {
@@ -17,6 +18,13 @@ export const mutations = {
     SET_SCREENINGS_LAST_PAGE(state, lastPage) {
         state.lastPage = lastPage
     },
+    UPDATE_SCREENING(state, newScreening) {
+        const screening = state.screenings.find(oldScreening => oldScreening.id === newScreening.id)
+        screening.movie = newScreening.movie
+        screening.room = newScreening.room
+        screening.start_time = newScreening.start_time
+        screening.price = newScreening.price
+    },
 }
 
 export const actions = {
@@ -33,4 +41,26 @@ export const actions = {
                 commit('SET_SCREENINGS_LAST_PAGE', response.data.meta.last_page)
             })
     },
+    updateScreening({commit}, {id, updatedScreening}) {
+        return screeningApi.updateScreening(id, updatedScreening)
+            .then(response => {
+                commit('UPDATE_SCREENING', response.data.data)
+            })
+    }
 }
+
+export const getters = {
+    getScreeningById: state => id => {
+        let screeningToEdit = state.screenings.find(screening => screening.id === id)
+        if (screeningToEdit) {
+            return screeningToEdit
+        }else {
+             screeningApi.getScreening(id)
+                .then(response => {
+                    screeningToEdit = response.data.data
+                    return screeningToEdit
+                })
+        }
+    }
+}
+

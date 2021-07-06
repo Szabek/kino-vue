@@ -1,7 +1,7 @@
 <template>
   <CCard>
-    <CCardHeader class="pt-4 pb-2">
-      <strong>Add new Screening:</strong>
+    <CCardHeader >
+      <strong>Edit Screening</strong>
     </CCardHeader>
     <CCardBody>
       <ValidationObserver ref="form">
@@ -62,7 +62,7 @@
           <ValidationProvider name="Room" rules="required" v-slot="{ errors }">
             <div class="alert-warning">{{ errors[0] }}</div>
             <CSelect
-                :value.sync='screening.room_id'
+                :value.sync='screeningToEdit.room_id'
                 :options="roomsSelect"
                 label="Room"
                 placeholder="Please select"
@@ -72,14 +72,14 @@
           <ValidationProvider name="Start time" rules="required" v-slot="{ errors }">
             <div class="alert-warning">{{ errors[0] }}</div>
             <CInput
-                :value.sync='screening.start_time'
+                :value.sync='screeningToEdit.start_time'
                 label="Start time"
                 type="datetime-local"
                 horizontal
             />
           </ValidationProvider>
           <CInput
-              :value.sync='screening.price'
+              :value.sync='screeningToEdit.price'
               label="Price"
               min="10"
               max="50"
@@ -94,7 +94,7 @@
               </CButton>
             </CCol>
             <CCol class="col-sm-2">
-              <h4 class="d-flex justify-content-center px-3 mt-1 text-primary">{{ screening.price }}</h4>
+              <h4 class="d-flex justify-content-center px-3 mt-1 text-primary">{{ screeningToEdit.price }}</h4>
             </CCol>
             <CCol>
               <CButton color="primary" @click="increasePrice">
@@ -115,7 +115,6 @@
       </ValidationObserver>
     </CCardBody>
     <CAlert
-
         color="secondary"
         :show.sync="currentAlertCounter"
         closeButton
@@ -134,13 +133,20 @@
   </CCard>
 </template>
 
+
 <script>
 import {mapState} from "vuex";
 
 export default {
+  props: {
+    screening: {
+      type: Object,
+      required: true,
+    }
+  },
   data() {
     return {
-      screening: this.newScreeningObject(),
+      screeningToEdit: this.createScreeningObject(),
       movieModal: false,
       page: 1,
       fields: [
@@ -199,8 +205,7 @@ export default {
         if (!success) {
           return;
         }
-        this.createScreening()
-        this.screening = this.newScreeningObject();
+        this.updateScreening()
         this.$nextTick(() => {
           this.$refs.form.reset();
           this.currentAlertCounter = 5;
@@ -208,31 +213,34 @@ export default {
       });
     },
     reset() {
-      this.screening = this.newScreeningObject();
+      this.screeningToEdit = this.createScreeningObject();
       this.$nextTick(() => {
         this.$refs.form.reset();
       });
     },
-    createScreening() {
-      this.$store.dispatch('screening/createScreening', this.screening)
-    },
-    newScreeningObject() {
-      return {
-        movie_id: '',
-        room_id: '',
-        start_time: '',
-        price: 20.0
-      }
+    updateScreening() {
+      this.$store.dispatch('screening/updateScreening', {
+        id: this.screeningToEdit.id,
+        updatedScreening: this.screeningToEdit})
     },
     increasePrice() {
-      this.screening.price = parseFloat(this.screening.price) + 0.5
+      this.screeningToEdit.price = parseFloat(this.screeningToEdit.price) + 0.5
     },
     decreasePrice() {
-      this.screening.price = parseFloat(this.screening.price) - 0.5
+      this.screeningToEdit.price = parseFloat(this.screeningToEdit.price) - 0.5
     },
     pickMovie(item) {
-      this.screening.movie_id = item.id;
+      this.screeningToEdit.movie_id = item.id;
       this.movieModal = false;
+    },
+    createScreeningObject() {
+      return {
+        id: this.screening.id,
+        movie_id: this.screening.movie.id,
+        room_id: this.screening.room.id,
+        start_time: this.screening.start_time,
+        price: this.screening.price,
+      }
     }
   },
   watch: {

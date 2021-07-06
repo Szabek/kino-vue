@@ -17,18 +17,6 @@ export default [
         _children: ['MANAGEMENT']
       },
       {
-        _name: 'CSidebarNavDropdown',
-        name: 'ADD NEW',
-        to: '/theme/colors',
-        icon: 'cil-movie',
-        items: [
-          {
-            name: 'Breadcrumbs',
-            to: '/base/breadcrumbs'
-          },
-        ]
-      },
-      {
         _name: 'CSidebarNavItem',
         name: 'Movies',
         to: {name: "Movies"},
@@ -47,10 +35,20 @@ export default [
         icon: 'cil-speedometer'
       },
       {
-        _name: 'CSidebarNavItem',
+        _name: 'CSidebarNavDropdown',
         name: 'Screenings',
-        to: {name: "Screenings"},
-        icon: 'cil-star'
+        route: '/screenings',
+        icon: 'cil-star',
+        items: [
+          {
+            name: 'Add',
+            to: {name: "Screenings-add"},
+          },
+          {
+            name: 'Show',
+            to: {name: "Screenings-show"},
+          },
+        ]
       },
       {
         _name: 'CSidebarNavTitle',

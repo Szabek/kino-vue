@@ -8,7 +8,6 @@
 import MovieEdit from "@/components/movie/MovieEdit";
 
 export default {
-  name: "MoviesEdit",
   props: {
     id: {
       required: true,
