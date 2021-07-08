@@ -1,6 +1,6 @@
 <template>
   <CCard>
-    <CCardHeader >
+    <CCardHeader>
       <strong>Edit Screening</strong>
     </CCardHeader>
     <CCardBody>
@@ -221,7 +221,8 @@ export default {
     updateScreening() {
       this.$store.dispatch('screening/updateScreening', {
         id: this.screeningToEdit.id,
-        updatedScreening: this.screeningToEdit})
+        updatedScreening: this.screeningToEdit
+      })
     },
     increasePrice() {
       this.screeningToEdit.price = parseFloat(this.screeningToEdit.price) + 0.5

@@ -53,7 +53,7 @@ const Users = () => import('@/views/template/users/Users')
 const User = () => import('@/views/template/users/User')
 
 const router = new Router({
-    mode: 'hash', // https://router.vuejs.org/api/#mode
+    mode: 'history',
     linkActiveClass: 'active',
     scrollBehavior: () => ({y: 0}),
     routes: configRoutes()
@@ -73,12 +73,13 @@ function configRoutes() {
         },
         {
             path: '/page404',
-            name: 'page404',
-            component: import('@/views/codeStatusPages/Page404')
-        }, {
+            name: 'Page404',
+            component: () => import('@/views/codeStatusPages/Page404')
+        },
+        {
             path: '/page500',
-            name: 'page500',
-            component: import('@/views/codeStatusPages/Page500')
+            name: 'Page500',
+            component: () => import('@/views/codeStatusPages/Page500')
         },
         {
             path: '/',

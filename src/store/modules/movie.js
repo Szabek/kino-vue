@@ -23,7 +23,13 @@ export const mutations = {
     },
     UPDATE_MOVIE(state, newMovie) {
         const movie = state.movies.find(oldMovie => oldMovie.id === newMovie.id)
-        state.movies[movie] = newMovie                                                      //TODO ten sposób nie diziała
+        movie.title = newMovie.title
+        movie.category = newMovie.category
+        movie.author = newMovie.author
+        movie.description = newMovie.description
+        movie.trailer = newMovie.trailer
+        movie.release_date = newMovie.release_date
+        movie.picture_source = newMovie.picture_source
     },
     DELETE_MOVIE(state, id) {
         const index = state.movies.findIndex(movie => movie.id === id)

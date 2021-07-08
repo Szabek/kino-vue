@@ -8,7 +8,7 @@
     >
       <template #show_edit="{item}">
         <td class="py-2">
-          <router-link :to="{ name: 'Screenings-edit', params: { id: item.movieId }}">
+          <router-link :to="{ name: 'Screenings-edit', params: { id: item.screeningId }}">
             <CButton
                 size="sm"
                 color="primary"
@@ -18,7 +18,6 @@
               Edit
             </CButton>
           </router-link>
-
         </td>
       </template>
     </CDataTable>
@@ -86,6 +85,7 @@ export default {
     itemsInList() {
       return this.screenings.map((screening, rowId) => {
         return {
+          screeningId: screening.id,
           movieId: screening.movie.id,
           movieTitle: screening.movie.title,
           movieAuthor: screening.movie.author,

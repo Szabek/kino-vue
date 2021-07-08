@@ -19,10 +19,10 @@ axios.interceptors.response.use(
                 store.dispatch('auth/logout')
                 break;
             case 404:
-                router.push({name: 'page404'})
+                router.push({name: 'Page404'})
                 break;
             case 500:
-                router.push({name: 'page500'})
+                router.push({name: 'Page500'})
                 break;
         }
 

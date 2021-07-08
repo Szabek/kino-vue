@@ -115,7 +115,6 @@
       </ValidationObserver>
     </CCardBody>
     <CAlert
-
         color="secondary"
         :show.sync="currentAlertCounter"
         closeButton

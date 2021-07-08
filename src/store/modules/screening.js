@@ -41,6 +41,13 @@ export const actions = {
                 commit('SET_SCREENINGS_LAST_PAGE', response.data.meta.last_page)
             })
     },
+    fetchScreening({commit}, id) {
+        return screeningApi.getScreening(id)
+            .then(response => {
+                console.log(response)
+                commit('ADD_SCREENING', response.data.data)
+            })
+    },
     updateScreening({commit}, {id, updatedScreening}) {
         return screeningApi.updateScreening(id, updatedScreening)
             .then(response => {
@@ -50,17 +57,17 @@ export const actions = {
 }
 
 export const getters = {
-    getScreeningById: state => id => {
-        let screeningToEdit = state.screenings.find(screening => screening.id === id)
-        if (screeningToEdit) {
-            return screeningToEdit
-        }else {
-             screeningApi.getScreening(id)
-                .then(response => {
-                    screeningToEdit = response.data.data
-                    return screeningToEdit
-                })
-        }
-    }
+    getScreeningById: state => id => state.screenings.find(screening => screening.id == id)
 }
 
+/*
+    if (screeningToEdit) {
+        return screeningToEdit
+    }else {
+        screeningApi.getScreening(id)
+            .then(response => {
+                screeningToEdit = response.data.data
+                return screeningToEdit
+            })
+    }
+}*/

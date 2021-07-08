@@ -14,6 +14,7 @@
 <script>
 import ScreeningEdit from "@/components/screening/ScreeningEdit";
 import ScreeningShow from "@/components/screening/ScreeningShow";
+import {mapActions} from "vuex";
 
 export default {
   components: {
@@ -25,45 +26,21 @@ export default {
       required: true,
     }
   },
-  data() {
-    return {
-      screening: '',
-      movieModal: false,
-      page: 1,
-      fields: [
-        {
-          key: 'title',
-          label: 'Title'
-        },
-        {
-          key: 'author',
-          label: 'Author'
-        },
-        {
-          key: 'categoryName',
-          label: 'Category'
-        },
-        {
-          key: 'pick_movie',
-          label: '',
-          _style: 'width:1%',
-          sorter: false,
-          filter: false
-        },
-      ],
-      details: [],
-      loading: false,
-      currentAlertCounter: 0
+  computed: {
+    screening() {
+      return this.$store.getters["screening/getScreeningById"](this.id);
     }
   },
-  mounted() {
-    /* screeningApi.getScreening(this.id)
-     .then(response => {
-       this.screening = response.data.data
-     })*/
-    this.screening = this.$store.getters["screening/getScreeningById"](this.id);
-
+  methods: {
+    ...mapActions('screening', [
+      'fetchScreening'
+    ])
   },
+  created() {
+    if (!this.$store.state["screening/screenings"]) {
+      this.fetchScreening(this.id)
+    }
+  }
 }
 </script>
 
