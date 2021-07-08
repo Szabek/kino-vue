@@ -44,7 +44,6 @@ export const actions = {
     fetchScreening({commit}, id) {
         return screeningApi.getScreening(id)
             .then(response => {
-                console.log(response)
                 commit('ADD_SCREENING', response.data.data)
             })
     },
@@ -60,14 +59,4 @@ export const getters = {
     getScreeningById: state => id => state.screenings.find(screening => screening.id == id)
 }
 
-/*
-    if (screeningToEdit) {
-        return screeningToEdit
-    }else {
-        screeningApi.getScreening(id)
-            .then(response => {
-                screeningToEdit = response.data.data
-                return screeningToEdit
-            })
-    }
-}*/
+

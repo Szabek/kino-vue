@@ -97,15 +97,6 @@ export default {
     },
     ...mapState('screening', ['screenings', 'lastPage']),
   },
-  methods: {
-    toggleDetails(item) {
-      item._toggled = !item._toggled
-      this.collapseDuration = 300
-      this.$nextTick(() => {
-        this.collapseDuration = 0
-      })
-    }
-  }
 }
 </script>
 
