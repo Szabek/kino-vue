@@ -23,33 +23,7 @@
               size="lg"
               :show.sync="movieModal"
           >
-            <CCardBody>
-              <CDataTable
-                  :items="itemsInList"
-                  :fields="fields"
-                  :loading="loading"
-                  hover
-              >
-                <template #pick_movie="{item, index}">
-                  <td class="py-2">
-                    <CButton
-                        color="primary"
-                        square
-                        size="sm"
-                        @click="pickMovie(item, index)"
-                    >
-                      Pick
-                    </CButton>
-                  </td>
-                </template>
-              </CDataTable>
-              <div>
-                <CPagination
-                    :activePage.sync="page"
-                    :pages="this.lastPage"
-                />
-              </div>
-            </CCardBody>
+            <ScreeningMovieSelect v-model="screeningToEdit.movie_id" v-on:input="movieModal = false"/>
             <template #footer>
               <CButton
                   color="secondary"
@@ -136,8 +110,12 @@
 
 <script>
 import {mapState} from "vuex";
+import ScreeningMovieSelect from "@/components/screening/ScreeningMovieSelect"
 
 export default {
+  components: {
+    ScreeningMovieSelect
+  },
   props: {
     screening: {
       type: Object,
@@ -148,56 +126,20 @@ export default {
     return {
       screeningToEdit: this.createScreeningObject(),
       movieModal: false,
-      page: 1,
-      fields: [
-        {
-          key: 'title',
-          label: 'Title'
-        },
-        {
-          key: 'author',
-          label: 'Author'
-        },
-        {
-          key: 'categoryName',
-          label: 'Category'
-        },
-        {
-          key: 'pick_movie',
-          label: '',
-          _style: 'width:1%',
-          sorter: false,
-          filter: false
-        },
-      ],
-      details: [],
-      loading: false,
       currentAlertCounter: 0
     }
   },
   created() {
-    this.$store.dispatch('movie/fetchMovies', 1)
     this.$store.dispatch('room/fetchRooms')
   },
   computed: {
-    itemsInList() {
-      return this.movies.map((movie, rowId) => {
-        return {
-          ...movie,
-          rowId,
-          categoryName: movie.category.name
-        }
-      })
-    },
     roomsSelect() {
       return this.rooms.map(room => {
         const label = `${room.name} | ${room.seats}`
         return {value: room.id, label: label}
       })
     },
-    ...mapState('movie', ['movies']),
     ...mapState('room', ['rooms']),
-    ...mapState('movie', ['lastPage'])
   },
   methods: {
     onSubmit() {
@@ -230,10 +172,6 @@ export default {
     decreasePrice() {
       this.screeningToEdit.price = parseFloat(this.screeningToEdit.price) - 0.5
     },
-    pickMovie(item) {
-      this.screeningToEdit.movie_id = item.id;
-      this.movieModal = false;
-    },
     createScreeningObject() {
       return {
         id: this.screening.id,
@@ -244,16 +182,6 @@ export default {
       }
     }
   },
-  watch: {
-    page(newValue) {
-      if (newValue > 0 && newValue <= this.lastPage) {
-        this.loading = true
-        this.$store.dispatch('movie/fetchMovies', {
-          page: this.page
-        }).then(() => this.loading = false)
-      }
-    }
-  }
 }
 </script>
 
