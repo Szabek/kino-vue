@@ -18,7 +18,7 @@ export const mutations = {
         room.name = newRoom.name
         room.seats = newRoom.seats
     },
-    DELETE_ROOM(state, id){
+    DELETE_ROOM(state, id) {
         const index = state.rooms.findIndex(room => room.id === id)
         state.rooms.splice(index, 1)
     }
@@ -37,32 +37,17 @@ export const actions = {
                 commit('SET_ROOMS', response.data.data)
             })
     },
-    updateRoom({commit, getters}, updatedRoom) {
-        const roomToUpdate = getters.getRoomById(updatedRoom.id)
-
-        if (roomToUpdate) {
-            return roomApi.updateRoom(updatedRoom.id, updatedRoom)
-                .then(response => {
-                    commit('UPDATE_ROOM', response.data.data)
-                })
-        }
+    updateRoom({commit}, updatedRoom) {
+        return roomApi.updateRoom(updatedRoom.id, updatedRoom)
+            .then(response => {
+                commit('UPDATE_ROOM', response.data.data)
+            })
     },
-    deleteRoom({commit, getters}, roomId) {
-        const roomToDelete = getters.getRoomById(roomId)
-
-        if (roomToDelete) {
-            return roomApi.deleteRoom(roomId)
-                .then(commit('DELETE_ROOM', roomId))
-                .catch(error => {
-                    console.log(error);
-                })
-        }
-
-    }
-}
-
-export const getters = {
-    getRoomById: state => id => {
-        return state.rooms.find(room => room.id === id)
+    deleteRoom({commit}, roomId) {
+        return roomApi.deleteRoom(roomId)
+            .then(commit('DELETE_ROOM', roomId))
+            .catch(error => {
+                console.log(error);
+            })
     }
 }

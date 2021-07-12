@@ -23,7 +23,13 @@ export const mutations = {
     },
     UPDATE_MOVIE(state, newMovie) {
         const movie = state.movies.find(oldMovie => oldMovie.id === newMovie.id)
-        state.movies[movie] = newMovie                                                      //TODO
+        movie.title = newMovie.title
+        movie.category = newMovie.category
+        movie.author = newMovie.author
+        movie.description = newMovie.description
+        movie.trailer = newMovie.trailer
+        movie.release_date = newMovie.release_date
+        movie.picture_source = newMovie.picture_source
     },
     DELETE_MOVIE(state, id) {
         const index = state.movies.findIndex(movie => movie.id === id)
@@ -33,7 +39,9 @@ export const mutations = {
 
 export const actions = {
     createMovie({commit}, movie) {
-        return movieApi.postMovie(movie)
+        const formData = createFormData(movie)
+
+        return movieApi.postMovie(formData)
             .then(response => {
                 commit('ADD_MOVIE', response.data.data)
             })
@@ -52,29 +60,32 @@ export const actions = {
             })
     },
     updateMovie({commit}, {id, updatedMovie}) {
+        const formData = createFormData(updatedMovie)
 
-        return movieApi.updateMovie(id, updatedMovie)
+        return movieApi.updateMovie(id, formData)
             .then(response => {
                 commit('UPDATE_MOVIE', response.data.data)
-                console.log(response.data)
             })
     },
-    deleteMovie({commit, getters}, movieId) {
-        const movieToDelete = getters.getMovieById(movieId)
-
-        if (movieToDelete) {
-            return movieApi.deleteMovie(movieId)
-                .then(commit('DELETE_MOVIE', movieId))
-                .catch(error => {
-                    console.log(error);
-                })
-        }
+    deleteMovie({commit}, movieId) {
+        return movieApi.deleteMovie(movieId)
+            .then(commit('DELETE_MOVIE', movieId))
 
     }
+}
 
-}
-export const getters = {
-    getMovieById: state => id => {
-        return state.movies.find(movie => movie.id === id)
+function createFormData(movie) {
+    const formData = new FormData();
+    formData.append('title', movie.title)
+    formData.append('category_id', movie.category_id)
+    formData.append('author', movie.author)
+    formData.append('description', movie.description)
+    formData.append('trailer', movie.trailer)
+    formData.append('release_date', movie.release_date)
+    if (movie.picture) {
+        formData.append('picture', movie.picture, movie.picture.name)
     }
+    return formData
 }
+
+

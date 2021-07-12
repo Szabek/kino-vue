@@ -38,28 +38,6 @@
 import {mapState} from "vuex";
 import MovieShow from "@/components/movie/MovieShow";
 
-const fields = [
-  {
-    key: 'title',
-    label: 'Title'
-  },
-  {
-    key: 'author',
-    label: 'Author'
-  },
-  {
-    key: 'category',
-    label: 'Category'
-  },
-  {
-    key: 'show_details',
-    label: '',
-    _style: 'width:1%',
-    sorter: false,
-    filter: false
-  },
-]
-
 export default {
   components: {
     MovieShow
@@ -68,14 +46,34 @@ export default {
     return {
       page: 1,
       loading: true,
-      fields: fields,
+      fields: [
+        {
+          key: 'title',
+          label: 'Title'
+        },
+        {
+          key: 'author',
+          label: 'Author'
+        },
+        {
+          key: 'categoryName',
+          label: 'Category'
+        },
+        {
+          key: 'show_details',
+          label: '',
+          _style: 'width:1%',
+          sorter: false,
+          filter: false
+        },
+      ],
       details: [],
       collapseDuration: 0
     }
   },
   created() {
     this.$store.dispatch('movie/fetchMovies', {page: this.page})
-        .then(this.endLoading)
+        .then(() => this.loading = false)
   },
   watch: {
     page(newValue) {
@@ -83,26 +81,24 @@ export default {
         this.loading = true
         this.$store.dispatch('movie/fetchMovies', {
           page: this.page
-        }).then(this.endLoading)
+        }).then(() => this.loading = false)
       }
     }
   },
   computed: {
     itemsInList() {
       return this.movies.map((movie, rowId) => {
-        return {...movie, rowId}
+        return {
+          ...movie,
+          rowId,
+          categoryName: movie.category.name
+        }
       })
     },
-    ...mapState({
-          movies: state => state.movie.movies,
-          lastPage: state => state.movie.lastPage
-        },
-    )
+    ...mapState('movie', ['movies']),
+    ...mapState('movie', ['lastPage'])
   },
   methods: {
-    endLoading() {
-      this.loading = false
-    },
     toggleDetails(item) {
       item._toggled = !item._toggled
       this.collapseDuration = 300

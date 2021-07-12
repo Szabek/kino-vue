@@ -7,8 +7,6 @@ Vue.use(Router)
 // Containers
 const TheContainer = () => import('@/containers/TheContainer')
 
-// Views
-const Dashboard = () => import('@/views/Dashboard')
 
 const Colors = () => import('@/views/template/theme/Colors')
 const Typography = () => import('@/views/template/theme/Typography')
@@ -50,24 +48,12 @@ const Alerts = () => import('@/views/template/notifications/Alerts')
 const Badges = () => import('@/views/template/notifications/Badges')
 const Modals = () => import('@/views/template/notifications/Modals')
 
-// Views - Pages
-const Page404 = () => import('@/views/codeStatusPages/Page404')
-const Page500 = () => import('@/views/codeStatusPages/Page500')
-const Login = () => import('@/views/admin/auth/LoginAdmin')
-const Register = () => import('@/views/admin/auth/RegisterAdmin')
-
 // Users
 const Users = () => import('@/views/template/users/Users')
 const User = () => import('@/views/template/users/User')
 
-//My Views
-const Categories = () => import('@/views/Categories')
-const Movies = () => import('@/views/Movies')
-const MoviesEdit = () => import('@/views/MoviesEdit')
-const Rooms = () => import('@/views/Rooms')
-
 const router = new Router({
-    mode: 'hash', // https://router.vuejs.org/api/#mode
+    mode: 'history',
     linkActiveClass: 'active',
     scrollBehavior: () => ({y: 0}),
     routes: configRoutes()
@@ -78,21 +64,22 @@ function configRoutes() {
         {
             path: '/register',
             name: 'register',
-            component: Register
+            component: () => import('@/views/admin/auth/RegisterAdmin')
         },
         {
             path: '/login',
             name: 'login',
-            component: Login
+            component: () => import('@/views/admin/auth/LoginAdmin')
         },
         {
             path: '/page404',
-            name: 'page404',
-            component: Page404
-        }, {
+            name: 'Page404',
+            component: () => import('@/views/codeStatusPages/Page404')
+        },
+        {
             path: '/page500',
-            name: 'page500',
-            component: Page500
+            name: 'Page500',
+            component: () => import('@/views/codeStatusPages/Page500')
         },
         {
             path: '/',
@@ -104,28 +91,44 @@ function configRoutes() {
                 {
                     path: 'dashboard',
                     name: 'Dashboard',
-                    component: Dashboard
+                    component: () => import('@/views/Dashboard')
                 },
                 {
                     path: '/movies',
                     name: 'Movies',
-                    component: Movies,
+                    component: () => import('@/views/Movies')
                 },
                 {
                     path: '/movies/:id/edit',
                     name: 'Movies-edit',
-                    component: MoviesEdit,
+                    component: () => import('@/views/MoviesEdit'),
                     props: true
                 },
                 {
                     path: '/rooms',
                     name: 'Rooms',
-                    component: Rooms,
+                    component: () => import('@/views/Rooms')
                 },
                 {
                     path: '/categories',
                     name: 'Categories',
-                    component: Categories
+                    component: () => import('@/views/Categories')
+                },
+                {
+                    path: '/screenings/add',
+                    name: 'Screenings-add',
+                    component: () => import('@/views/ScreeningsAdd')
+                },
+                {
+                    path: '/screenings/show',
+                    name: 'Screenings-show',
+                    component: () => import('@/views/ScreeningsShow')
+                },
+                {
+                    path: '/screenings/:id/edit',
+                    name: 'Screenings-edit',
+                    component: () => import('@/views/ScreeningsEdit'),
+                    props: true
                 },
                 {
                     path: 'theme',

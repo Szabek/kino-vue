@@ -75,7 +75,7 @@ export default {
   },
   created() {
     this.$store.dispatch('room/fetchRooms')
-        .then(this.endLoading)
+        .then(() => this.loading = false)
   },
   computed: {
     itemsInList() {
@@ -83,12 +83,9 @@ export default {
         return {...room, rowId}
       })
     },
-    ...mapState({rooms: state => state.room.rooms})
+    ...mapState('room', ['rooms'])
   },
   methods: {
-    endLoading() {
-      this.loading = false
-    },
     toggleDetails(item) {
       item._toggled = !item._toggled
       this.collapseDuration = 300

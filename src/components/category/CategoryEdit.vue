@@ -5,17 +5,15 @@
         <h4>{{ name }}</h4>
       </CCol>
       <CCol>
-        <a href="javascript:" v-on:click="deleteCategory">
-          <CButton size="sm" color="danger">
+          <CButton size="sm" color="danger" v-on:click="deleteCategory">
             Delete
           </CButton>
-        </a>
       </CCol>
     </CRow>
     <ValidationObserver v-slot="{ handleSubmit }">
       <CForm @submit.prevent="handleSubmit(updateCategory)">
         <ValidationProvider name="Category" rules="required||alpha_spaces" v-slot="{ errors }">
-          <span class="alert-warning">{{ errors[0] }}</span>
+          <div class="alert-warning">{{ errors[0] }}</div>
           <CInput
               v-model="category.name"
               label="Rename Category:"
@@ -81,7 +79,5 @@ export default {
 </script>
 
 <style scoped>
-span {
-  display: block;
-}
+
 </style>
