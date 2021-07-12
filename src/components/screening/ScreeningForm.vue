@@ -150,11 +150,13 @@ export default {
     },
     createScreeningObject() {
       if (this.screening) {
+        const date = new Date(this.screening.start_time).toISOString().replace(/:00.000Z/, "");
+
         return {
           id: this.screening.id,
           movie_id: this.screening.movie.id,
           room_id: this.screening.room.id,
-          start_time: this.screening.start_time,
+          start_time: date,
           price: this.screening.price,
         }
       }
