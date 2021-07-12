@@ -71,8 +71,8 @@ export default {
       })
     },
     ...mapState('movie', [
-        'movies',
-        'lastPage'
+      'movies',
+      'lastPage'
     ]),
   },
   methods: {
