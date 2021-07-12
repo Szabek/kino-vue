@@ -61,14 +61,15 @@
 import MovieShow from "@/components/movie/MovieShow";
 
 export default {
+  components: {
+    MovieShow
+  },
   props: {
     screening: {
       type: Object,
       required: true,
     }
   },
-  components: {
-    MovieShow  }
 }
 </script>
 

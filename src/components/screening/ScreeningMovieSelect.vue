@@ -75,11 +75,6 @@ export default {
       'lastPage'
     ]),
   },
-  methods: {
-    pickMovie(item) {
-      this.$emit('input', item.id)
-    }
-  },
   watch: {
     page(newValue) {
       if (newValue > 0 && newValue <= this.lastPage) {
@@ -92,6 +87,11 @@ export default {
   },
   created() {
     this.$store.dispatch('movie/fetchMovies', 1)
+  },
+  methods: {
+    pickMovie(item) {
+      this.$emit('input', item.id)
+    }
   }
 }
 </script>

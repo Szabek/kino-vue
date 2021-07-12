@@ -111,9 +111,6 @@ export default {
       currentAlertCounter: 0
     }
   },
-  created() {
-    this.$store.dispatch('room/fetchRooms')
-  },
   computed: {
     roomsSelect() {
       return this.rooms.map(room => {
@@ -123,6 +120,9 @@ export default {
     },
     ...mapState('room', ['rooms']),
   },
+  created() {
+    this.$store.dispatch('room/fetchRooms')
+  },
   methods: {
     onSubmit() {
       this.$refs.form.validate().then(success => {
@@ -131,9 +131,9 @@ export default {
         }
         this.$emit('screeningFormSubmit', this.form)
         this.screening ? null : this.form = this.createScreeningObject(),
-        this.$nextTick(() => {
-          this.$refs.form.reset();
-        });
+            this.$nextTick(() => {
+              this.$refs.form.reset();
+            });
       });
     },
     reset() {
