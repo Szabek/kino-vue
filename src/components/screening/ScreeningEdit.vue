@@ -7,10 +7,8 @@
   </CCard>
 </template>
 
-
 <script>
 import ScreeningForm from "@/components/screening/ScreeningForm"
-
 
 export default {
   components: {

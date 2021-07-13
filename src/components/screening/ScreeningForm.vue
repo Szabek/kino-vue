@@ -6,7 +6,6 @@
           <div class="alert-warning">{{ errors[0] }}</div>
           <div class="text-right pb-3">
             <span class="float-left">Movie:</span>
-
             <CButton
                 class="w-75"
                 @click="movieModal = true"
@@ -151,7 +150,6 @@ export default {
     createScreeningObject() {
       if (this.screening) {
         const date = new Date(this.screening.start_time).toISOString().replace(/:00.000Z/, "");
-
         return {
           id: this.screening.id,
           movie_id: this.screening.movie.id,
