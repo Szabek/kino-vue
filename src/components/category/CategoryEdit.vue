@@ -29,6 +29,20 @@
 
 <script>
 export default {
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    toggled: {
+      type: Boolean,
+      required: false,
+    },
+  },
   data() {
     return {
       category: {}
@@ -60,20 +74,6 @@ export default {
         name: this.name
       }
     }
-  },
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    toggled: {
-      type: Boolean,
-      required: false,
-    },
   }
 }
 </script>

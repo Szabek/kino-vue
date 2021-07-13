@@ -6,23 +6,17 @@
         :loading="loading"
         hover
     >
-      <template #show_details="{item, index}">
+      <template #pick_movie="{item, index}">
         <td class="py-2">
           <CButton
               color="primary"
-              variant="outline"
               square
               size="sm"
-              @click="toggleDetails(item, index)"
+              @click="pickMovie(item, index)"
           >
-            {{ Boolean(item._toggled) ? 'Hide' : 'Show' }}
+            Pick
           </CButton>
         </td>
-      </template>
-      <template #details="{item}">
-        <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          <MovieShow :movie="item"/>
-        </CCollapse>
       </template>
     </CDataTable>
     <div>
@@ -36,16 +30,11 @@
 
 <script>
 import {mapState} from "vuex";
-import MovieShow from "@/components/movie/MovieShow";
 
 export default {
-  components: {
-    MovieShow
-  },
   data() {
     return {
       page: 1,
-      loading: true,
       fields: [
         {
           key: 'title',
@@ -60,7 +49,7 @@ export default {
           label: 'Category'
         },
         {
-          key: 'show_details',
+          key: 'pick_movie',
           label: '',
           _style: 'width:1%',
           sorter: false,
@@ -68,7 +57,7 @@ export default {
         },
       ],
       details: [],
-      collapseDuration: 0
+      loading: false,
     }
   },
   computed: {
@@ -81,8 +70,10 @@ export default {
         }
       })
     },
-    ...mapState('movie', ['movies']),
-    ...mapState('movie', ['lastPage'])
+    ...mapState('movie', [
+      'movies',
+      'lastPage'
+    ]),
   },
   watch: {
     page(newValue) {
@@ -95,16 +86,11 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('movie/fetchMovies', {page: this.page})
-        .then(() => this.loading = false)
+    this.$store.dispatch('movie/fetchMovies', 1)
   },
   methods: {
-    toggleDetails(item) {
-      item._toggled = !item._toggled
-      this.collapseDuration = 300
-      this.$nextTick(() => {
-        this.collapseDuration = 0
-      })
+    pickMovie(item) {
+      this.$emit('input', item.id)
     }
   }
 }

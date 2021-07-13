@@ -67,20 +67,6 @@ export default {
       collapseDuration: 0
     }
   },
-  created() {
-    this.$store.dispatch('screening/fetchScreenings', {page: this.page})
-        .then(() => this.loading = false)
-  },
-  watch: {
-    page(newValue) {
-      if (newValue > 0 && newValue <= this.lastPage) {
-        this.loading = true
-        this.$store.dispatch('screening/fetchScreenings', {
-          page: this.page
-        }).then(() => this.loading = false)
-      }
-    }
-  },
   computed: {
     itemsInList() {
       return this.screenings.map((screening, rowId) => {
@@ -97,6 +83,20 @@ export default {
     },
     ...mapState('screening', ['screenings', 'lastPage']),
   },
+  watch: {
+    page(newValue) {
+      if (newValue > 0 && newValue <= this.lastPage) {
+        this.loading = true
+        this.$store.dispatch('screening/fetchScreenings', {
+          page: this.page
+        }).then(() => this.loading = false)
+      }
+    }
+  },
+  created() {
+    this.$store.dispatch('screening/fetchScreenings', {page: this.page})
+        .then(() => this.loading = false)
+  }
 }
 </script>
 
