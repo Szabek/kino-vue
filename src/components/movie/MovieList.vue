@@ -71,20 +71,6 @@ export default {
       collapseDuration: 0
     }
   },
-  created() {
-    this.$store.dispatch('movie/fetchMovies', {page: this.page})
-        .then(() => this.loading = false)
-  },
-  watch: {
-    page(newValue) {
-      if (newValue > 0 && newValue <= this.lastPage) {
-        this.loading = true
-        this.$store.dispatch('movie/fetchMovies', {
-          page: this.page
-        }).then(() => this.loading = false)
-      }
-    }
-  },
   computed: {
     itemsInList() {
       return this.movies.map((movie, rowId) => {
@@ -97,6 +83,20 @@ export default {
     },
     ...mapState('movie', ['movies']),
     ...mapState('movie', ['lastPage'])
+  },
+  watch: {
+    page(newValue) {
+      if (newValue > 0 && newValue <= this.lastPage) {
+        this.loading = true
+        this.$store.dispatch('movie/fetchMovies', {
+          page: this.page
+        }).then(() => this.loading = false)
+      }
+    }
+  },
+  created() {
+    this.$store.dispatch('movie/fetchMovies', {page: this.page})
+        .then(() => this.loading = false)
   },
   methods: {
     toggleDetails(item) {

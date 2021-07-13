@@ -103,6 +103,14 @@ export default {
       movie: this.newMovieObject()
     }
   },
+  computed: {
+    categoriesSelect() {
+      return this.categories.map(item => {
+        return {value: item.id, label: item.name}
+      })
+    },
+    ...mapState('category', ['categories'])
+  },
   created() {
     this.$store.dispatch('category/fetchCategories')
   },
@@ -142,15 +150,7 @@ export default {
         picture: ''
       };
     }
-  },
-  computed: {
-    categoriesSelect() {
-      return this.categories.map(item => {
-        return {value: item.id, label: item.name}
-      })
-    },
-    ...mapState('category', ['categories'])
-  },
+  }
 }
 </script>
 

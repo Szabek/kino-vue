@@ -1,11 +1,11 @@
 <template>
-<CContainer>
-  <CRow>
-    <CCol class="col-md-10 mx-auto">
-      <ScreeningCreate/>
-    </CCol>
-  </CRow>
-</CContainer>
+  <CContainer>
+    <CRow>
+      <CCol class="col-md-10 mx-auto">
+        <ScreeningCreate/>
+      </CCol>
+    </CRow>
+  </CContainer>
 </template>
 
 <script>

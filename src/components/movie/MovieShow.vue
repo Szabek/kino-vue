@@ -38,15 +38,15 @@
 import {STORAGE_URL} from "@/constants";
 
 export default {
-  data() {
-    return {
-      STORAGE_URL: STORAGE_URL
-    }
-  },
   props: {
     movie: {
       type: Object,
       required: true,
+    }
+  },
+  data() {
+    return {
+      STORAGE_URL: STORAGE_URL
     }
   },
   methods: {

@@ -104,14 +104,6 @@ export default {
       required: true,
     },
   },
-  created() {
-    this.fetchCategories()
-    this.fetchMovieToEdit(this.id)
-  },
-  beforeUpdate() {
-    this.movie = this.movieToEdit
-    this.movie.category_id = this.movieToEdit.category.id
-  },
   computed: {
     categoriesSelect() {
       return this.categories.map(item => {
@@ -120,6 +112,14 @@ export default {
     },
     ...mapState('category', ['categories']),
     ...mapState('movie', ['movieToEdit'])
+  },
+  created() {
+    this.fetchCategories()
+    this.fetchMovieToEdit(this.id)
+  },
+  beforeUpdate() {
+    this.movie = this.movieToEdit
+    this.movie.category_id = this.movieToEdit.category.id
   },
   methods: {
     onSubmit() {
