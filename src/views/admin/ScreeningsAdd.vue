@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ScreeningCreate from "@/components/screening/ScreeningCreate";
+import ScreeningCreate from "@/components/adminPanel/screening/ScreeningCreate";
 
 export default {
   components: {

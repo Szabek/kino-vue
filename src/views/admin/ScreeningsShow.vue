@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ScreeningList from "@/components/screening/ScreeningList";
+import ScreeningList from "@/components/adminPanel/screening/ScreeningList";
 
 export default {
   components: {

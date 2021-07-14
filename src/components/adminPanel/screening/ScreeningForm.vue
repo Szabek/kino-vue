@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import ScreeningMovieSelect from "@/components/screening/ScreeningMovieSelect"
+import ScreeningMovieSelect from "@/components/adminPanel/screening/ScreeningMovieSelect"
 import {mapState} from "vuex";
 
 export default {

@@ -201,8 +201,8 @@
 </template>
 
 <script>
-import MainChartExample from './template/charts/MainChartExample'
-import WidgetsDropdown from './template/widgets/WidgetsDropdown'
+import MainChartExample from '../template/charts/MainChartExample'
+import WidgetsDropdown from '../template/widgets/WidgetsDropdown'
 
 export default {
   name: 'Dashboard',

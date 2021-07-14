@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import RoomList from "@/components/room/RoomList";
-import RoomCreate from "@/components/room/RoomCreate";
+import RoomList from "@/components/adminPanel/room/RoomList";
+import RoomCreate from "@/components/adminPanel/room/RoomCreate";
 
 export default {
   components: {

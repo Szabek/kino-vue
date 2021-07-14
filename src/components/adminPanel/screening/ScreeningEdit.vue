@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ScreeningForm from "@/components/screening/ScreeningForm"
+import ScreeningForm from "@/components/adminPanel/screening/ScreeningForm"
 
 export default {
   components: {

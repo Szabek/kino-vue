@@ -26,12 +26,7 @@
       </template>
       <template #details="{item}">
         <CCollapse :show="Boolean(item._toggled)" :duration="collapseDuration">
-          <RoomEdit
-              :id="item.id"
-              :name="item.name"
-              :seats="item.seats"
-              :toggled="item._toggled"
-          />
+          <CategoryEdit :id="item.id" :name="item.name" :toggled="item._toggled"/>
         </CCollapse>
       </template>
     </CDataTable>
@@ -39,18 +34,13 @@
 </template>
 
 <script>
+import CategoryEdit from "@/components/adminPanel/category/CategoryEdit";
 import {mapState} from "vuex";
-import RoomEdit from "@/components/room/RoomEdit";
 
 const fields = [
   {
     key: 'name',
-    label: 'Name'
-  },
-  {
-    key: 'seats',
-    label: 'Seats',
-    filter: false
+    label: 'Category'
   },
   {
     key: 'show_details',
@@ -63,7 +53,7 @@ const fields = [
 
 export default {
   components: {
-    RoomEdit
+    CategoryEdit
   },
   data() {
     return {
@@ -75,14 +65,14 @@ export default {
   },
   computed: {
     itemsInList() {
-      return this.rooms.map((room, rowId) => {
-        return {...room, rowId}
+      return this.categories.map((category, rowId) => {
+        return {...category, rowId}
       })
     },
-    ...mapState('room', ['rooms'])
+    ...mapState('category', ['categories'])
   },
   created() {
-    this.$store.dispatch('room/fetchRooms')
+    this.$store.dispatch('category/fetchCategories')
         .then(() => this.loading = false)
   },
   methods: {
@@ -93,7 +83,7 @@ export default {
         this.collapseDuration = 0
       })
     }
-  },
+  }
 }
 </script>
 
