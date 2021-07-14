@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import CategoryEdit from "@/components/category/CategoryEdit";
+import CategoryEdit from "@/components/adminPanel/category/CategoryEdit";
 import {mapState} from "vuex";
 
 const fields = [
@@ -63,10 +63,6 @@ export default {
       collapseDuration: 0
     }
   },
-  created() {
-    this.$store.dispatch('category/fetchCategories')
-        .then(() => this.loading = false)
-  },
   computed: {
     itemsInList() {
       return this.categories.map((category, rowId) => {
@@ -74,6 +70,10 @@ export default {
       })
     },
     ...mapState('category', ['categories'])
+  },
+  created() {
+    this.$store.dispatch('category/fetchCategories')
+        .then(() => this.loading = false)
   },
   methods: {
     toggleDetails(item) {

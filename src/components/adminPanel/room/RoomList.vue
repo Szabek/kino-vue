@@ -40,7 +40,7 @@
 
 <script>
 import {mapState} from "vuex";
-import RoomEdit from "@/components/room/RoomEdit";
+import RoomEdit from "@/components/adminPanel/room/RoomEdit";
 
 const fields = [
   {
@@ -73,10 +73,6 @@ export default {
       collapseDuration: 0
     }
   },
-  created() {
-    this.$store.dispatch('room/fetchRooms')
-        .then(() => this.loading = false)
-  },
   computed: {
     itemsInList() {
       return this.rooms.map((room, rowId) => {
@@ -84,6 +80,10 @@ export default {
       })
     },
     ...mapState('room', ['rooms'])
+  },
+  created() {
+    this.$store.dispatch('room/fetchRooms')
+        .then(() => this.loading = false)
   },
   methods: {
     toggleDetails(item) {
@@ -93,7 +93,7 @@ export default {
         this.collapseDuration = 0
       })
     }
-  }
+  },
 }
 </script>
 

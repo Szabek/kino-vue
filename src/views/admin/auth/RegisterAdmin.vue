@@ -9,36 +9,44 @@
                 <h1>Register</h1>
                 <p class="text-muted">Create your account</p>
                 <CInput
-                  placeholder="Name"
-                  autocomplete="name"
+                    placeholder="Name"
+                    autocomplete="name"
                 >
-                  <template #prepend-content><CIcon name="cil-user"/></template>
+                  <template #prepend-content>
+                    <CIcon name="cil-user"/>
+                  </template>
                 </CInput>
                 <CInput
                     placeholder="Surname"
                     autocomplete="surname"
                 >
-                  <template #prepend-content><CIcon name="cil-user"/></template>
+                  <template #prepend-content>
+                    <CIcon name="cil-user"/>
+                  </template>
                 </CInput>
                 <CInput
-                  placeholder="Email"
-                  autocomplete="email"
-                  prepend="@"
+                    placeholder="Email"
+                    autocomplete="email"
+                    prepend="@"
                 />
                 <CInput
-                  placeholder="Password"
-                  type="password"
-                  autocomplete="new-password"
+                    placeholder="Password"
+                    type="password"
+                    autocomplete="new-password"
                 >
-                  <template #prepend-content><CIcon name="cil-lock-locked"/></template>
+                  <template #prepend-content>
+                    <CIcon name="cil-lock-locked"/>
+                  </template>
                 </CInput>
                 <CInput
-                  placeholder="Repeat password"
-                  type="password"
-                  autocomplete="new-password"
-                  class="mb-4"
+                    placeholder="Repeat password"
+                    type="password"
+                    autocomplete="new-password"
+                    class="mb-4"
                 >
-                  <template #prepend-content><CIcon name="cil-lock-locked"/></template>
+                  <template #prepend-content>
+                    <CIcon name="cil-lock-locked"/>
+                  </template>
                 </CInput>
                 <CButton color="success" block>Create Account</CButton>
               </CForm>

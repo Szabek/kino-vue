@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import MovieList from "@/components/movie/MovieList";
-import MovieCreate from "@/components/movie/MovieCreate";
+import MovieList from "@/components/adminPanel/movie/MovieList";
+import MovieCreate from "@/components/adminPanel/movie/MovieCreate";
 
 export default {
   components: {

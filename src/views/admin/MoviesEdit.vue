@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MovieEdit from "@/components/movie/MovieEdit";
+import MovieEdit from "@/components/adminPanel/movie/MovieEdit";
 
 export default {
   props: {
