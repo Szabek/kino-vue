@@ -4,9 +4,6 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 
-// Containers
-const TheContainer = () => import('@/containers/TheContainer')
-
 
 const router = new Router({
     mode: 'history',
@@ -18,12 +15,17 @@ const router = new Router({
 function configRoutes() {
     return [
         {
-            path: '/register',
-            name: 'register',
-            component: () => import('@/views/admin/auth/RegisterAdmin')
+            path: '/login-admin',
+            name: 'login',
+            component: () => import('@/views/admin/auth/LoginAdmin')
         },
         {
-            path: '/login',
+            path: '/login-user',
+            name: 'login',
+            component: () => import('@/views/admin/auth/LoginAdmin')
+        },
+        {
+            path: '/register-user',
             name: 'login',
             component: () => import('@/views/admin/auth/LoginAdmin')
         },
@@ -38,10 +40,10 @@ function configRoutes() {
             component: () => import('@/views/codeStatusPages/Page500')
         },
         {
-            path: '/',
-            redirect: '/dashboard',
+            path: '/admin',
+            redirect: {name: "Dashboard"},
             name: 'Home',
-            component: TheContainer,
+            component: () => import('@/containers/TheContainer'),
             meta: {requiresAuth: true},
             children: [
                 {
@@ -50,38 +52,38 @@ function configRoutes() {
                     component: () => import('@/views/admin/Dashboard')
                 },
                 {
-                    path: '/movies',
+                    path: 'movies',
                     name: 'Movies',
                     component: () => import('@/views/admin/Movies')
                 },
                 {
-                    path: '/movies/:id/edit',
+                    path: 'movies/:id/edit',
                     name: 'Movies-edit',
                     component: () => import('@/views/admin/MoviesEdit'),
                     props: true
                 },
                 {
-                    path: '/rooms',
+                    path: 'rooms',
                     name: 'Rooms',
                     component: () => import('@/views/admin/Rooms')
                 },
                 {
-                    path: '/categories',
+                    path: 'categories',
                     name: 'Categories',
                     component: () => import('@/views/admin/Categories')
                 },
                 {
-                    path: '/screenings/add',
+                    path: 'screenings/add',
                     name: 'Screenings-add',
                     component: () => import('@/views/admin/ScreeningsAdd')
                 },
                 {
-                    path: '/screenings/show',
+                    path: 'screenings/show',
                     name: 'Screenings-show',
                     component: () => import('@/views/admin/ScreeningsShow')
                 },
                 {
-                    path: '/screenings/:id/edit',
+                    path: 'screenings/:id/edit',
                     name: 'Screenings-edit',
                     component: () => import('@/views/admin/ScreeningsEdit'),
                     props: true
@@ -95,7 +97,7 @@ router.beforeEach((to, from, next) => {
     const loggedIn = localStorage.getItem('user')
 
     if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
-        next('/login')
+        next('/login-admin')
     }
 
     next()
