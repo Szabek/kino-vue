@@ -31,10 +31,15 @@ new Vue({
         App
     },
     created() {
+        const adminString = localStorage.getItem('admin')
         const userString = localStorage.getItem('user')
+        if (adminString) {
+            const adminData = JSON.parse(adminString)
+            this.$store.commit('authAdmin/SET_ADMIN_DATA', adminData)
+        }
         if (userString) {
             const userData = JSON.parse(userString)
-            this.$store.commit('auth/SET_USER_DATA', userData)
+            this.$store.commit('authUser/SET_USER_DATA', userData)
         }
     },
     render: h => h(App)

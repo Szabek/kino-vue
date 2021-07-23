@@ -7,7 +7,7 @@
   >
     <CSidebarBrand class="d-md-down-none" to="/admin">
       <CImg
-          src="./kino_logo.png"
+          src="kino_logo.png"
           class="w-50"
       />
     </CSidebarBrand>
