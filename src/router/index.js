@@ -4,7 +4,6 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 
-
 const router = new Router({
     mode: 'history',
     linkActiveClass: 'active',
@@ -21,13 +20,13 @@ function configRoutes() {
         },
         {
             path: '/login-user',
-            name: 'login',
-            component: () => import('@/views/admin/auth/LoginAdmin')
+            name: 'Login-user',
+            component: () => import('@/views/user/auth/LoginUser')
         },
         {
             path: '/register-user',
-            name: 'login',
-            component: () => import('@/views/admin/auth/LoginAdmin')
+            name: 'Register-user',
+            component: () => import('@/views/user/auth/RegisterUser')
         },
         {
             path: '/page404',
@@ -44,7 +43,7 @@ function configRoutes() {
             redirect: {name: "Dashboard"},
             name: 'Home',
             component: () => import('@/containers/TheContainer'),
-            meta: {requiresAuth: true},
+            meta: {isAdmin: true},
             children: [
                 {
                     path: 'dashboard',
@@ -89,15 +88,34 @@ function configRoutes() {
                     props: true
                 },
             ]
+        },
+        {
+            path: '/',
+            redirect: {name: "Sample"},
+            name: 'Main',
+            component: () => import('@/views/user/containers/CinemaContainer'),
+            meta: {isUser: true},
+            children: [
+                {
+                    path: '/sample',
+                    name: 'Sample',
+                    component: () => import('@/views/user/SampleView')
+                },
+            ]
         }
     ]
 }
 
 router.beforeEach((to, from, next) => {
-    const loggedIn = localStorage.getItem('user')
+    const loggedAsAdmin = localStorage.getItem('admin');
+    const loggedAsUser = localStorage.getItem('user');
 
-    if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    if (to.matched.some(record => record.meta.isAdmin) && !loggedAsAdmin) {
         next('/login-admin')
+    }
+
+    if (to.matched.some(record => record.meta.isUser) && !loggedAsUser) {
+        next('/login-user')
     }
 
     next()

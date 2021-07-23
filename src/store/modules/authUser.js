@@ -1,5 +1,5 @@
 import axios from "axios";
-import {login, logout} from "@/api/adminAuth";
+import {login, register, logout} from "@/api/userAuth";
 export const namespaced = true
 
 export const state = {
@@ -27,6 +27,12 @@ export const actions = {
                 commit('SET_USER_DATA', data)
             })
     },
+    async register({commit},credentials) {
+        return register(credentials)
+            .then(({data}) => {
+                commit('SET_USER_DATA', data)
+            })
+    },
     async logout({commit}) {
         return logout()
             .then(commit('CLEAR_USER_DATA'))
@@ -38,5 +44,3 @@ export const getters = {
         return !!state.user
     }
 }
-
-

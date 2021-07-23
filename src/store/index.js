@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as auth from '@/store/modules/auth'
+import * as authAdmin from '@/store/modules/authAdmin'
+import * as authUser from '@/store/modules/authUser'
 import * as category from '@/store/modules/category'
 import * as movie from '@/store/modules/movie'
 import * as room from '@/store/modules/room'
@@ -10,7 +11,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
-        auth,
+        authAdmin,
+        authUser,
         category,
         movie,
         room,
