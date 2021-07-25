@@ -59,13 +59,13 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
                   et dolore magna aliqua.</p>
                 <router-link :to="{ name: 'Register-user' }">
-                <CButton
-                    color="light"
-                    variant="outline"
-                    size="lg"
-                >
-                  Register Now!
-                </CButton>
+                  <CButton
+                      color="light"
+                      variant="outline"
+                      size="lg"
+                  >
+                    Register Now!
+                  </CButton>
                 </router-link>
               </CCardBody>
             </CCard>
@@ -93,7 +93,7 @@ export default {
             password: this.password
           })
           .then(() => {
-            this.$router.push({name: 'Register-user'})
+            this.$router.push({name: 'Main'})
           })
           .catch(err => {
             this.error = err.response.data.error

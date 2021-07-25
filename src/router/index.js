@@ -19,16 +19,6 @@ function configRoutes() {
             component: () => import('@/views/admin/auth/LoginAdmin')
         },
         {
-            path: '/login-user',
-            name: 'Login-user',
-            component: () => import('@/views/user/auth/LoginUser')
-        },
-        {
-            path: '/register-user',
-            name: 'Register-user',
-            component: () => import('@/views/user/auth/RegisterUser')
-        },
-        {
             path: '/page404',
             name: 'Page404',
             component: () => import('@/views/codeStatusPages/Page404')
@@ -94,12 +84,21 @@ function configRoutes() {
             redirect: {name: "Sample"},
             name: 'Main',
             component: () => import('@/views/user/containers/CinemaContainer'),
-            meta: {isUser: true},
             children: [
                 {
                     path: '/sample',
                     name: 'Sample',
                     component: () => import('@/views/user/SampleView')
+                },
+                {
+                    path: '/login-user',
+                    name: 'Login-user',
+                    component: () => import('@/views/user/auth/LoginUser')
+                },
+                {
+                    path: '/register-user',
+                    name: 'Register-user',
+                    component: () => import('@/views/user/auth/RegisterUser')
                 },
             ]
         }

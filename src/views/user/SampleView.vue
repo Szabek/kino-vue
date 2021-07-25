@@ -1,5 +1,7 @@
 <template>
-<h3>Hello from sample view</h3>
+  <div class="container">
+    <h3>Hello from sample view</h3>
+  </div>
 </template>
 
 <script>
