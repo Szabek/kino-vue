@@ -32,7 +32,7 @@
               <em>{{ user.user.name }} {{ user.user.surname }}</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -46,6 +46,11 @@ import {mapState} from "vuex";
 export default {
   computed: {
     ...mapState('authUser', ['user'])
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('authUser/logout')
+    }
   }
 }
 </script>

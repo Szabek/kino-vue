@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex align-items-center min-vh-100">
-    <CContainer fluid>
+  <div class="py-5">
+    <CContainer fluid class="container">
       <CRow class="justify-content-center">
         <CCol md="6">
           <CCard class="mx-4 mb-0">
@@ -11,36 +11,36 @@
                   <p class="text-muted">Create your account</p>
                   <ValidationProvider name="E-mail" rules="required|email" v-slot="{ errors }">
                     <div class="alert-warning">{{ errors[0] }}</div>
-                  <CInput
-                      placeholder="Email"
-                      autocomplete="email"
-                      prepend="@"
-                      v-model="email"
-                  />
+                    <CInput
+                        placeholder="Email"
+                        autocomplete="email"
+                        prepend="@"
+                        v-model="email"
+                    />
                   </ValidationProvider>
                   <ValidationProvider name="Name" rules="required" v-slot="{ errors }">
                     <div class="alert-warning">{{ errors[0] }}</div>
-                  <CInput
-                      placeholder="Name"
-                      autocomplete="name"
-                      v-model="name"
-                  >
-                    <template #prepend-content>
-                      <CIcon name="cil-user"/>
-                    </template>
-                  </CInput>
+                    <CInput
+                        placeholder="Name"
+                        autocomplete="name"
+                        v-model="name"
+                    >
+                      <template #prepend-content>
+                        <CIcon name="cil-user"/>
+                      </template>
+                    </CInput>
                   </ValidationProvider>
                   <ValidationProvider name="Surname" rules="required" v-slot="{ errors }">
                     <div class="alert-warning">{{ errors[0] }}</div>
-                  <CInput
-                      placeholder="Surname"
-                      autocomplete="surname"
-                      v-model="surname"
-                  >
-                    <template #prepend-content>
-                      <CIcon name="cil-user"/>
-                    </template>
-                  </CInput>
+                    <CInput
+                        placeholder="Surname"
+                        autocomplete="surname"
+                        v-model="surname"
+                    >
+                      <template #prepend-content>
+                        <CIcon name="cil-user"/>
+                      </template>
+                    </CInput>
                   </ValidationProvider>
                   <ValidationProvider name="Password" rules="required" v-slot="{ errors }">
                     <div class="alert-warning">{{ errors[0] }}</div>
@@ -55,7 +55,8 @@
                       </template>
                     </CInput>
                   </ValidationProvider>
-                  <ValidationProvider name="Password confirmation" rules="required|confirmed:Password" v-slot="{ errors }">
+                  <ValidationProvider name="Password confirmation" rules="required|confirmed:Password"
+                                      v-slot="{ errors }">
                     <div class="alert-warning">{{ errors[0] }}</div>
                     <CInput
                         placeholder="Repeat password"
@@ -124,3 +125,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>
