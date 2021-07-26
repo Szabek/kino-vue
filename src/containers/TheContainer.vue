@@ -16,7 +16,6 @@
     </CWrapper>
   </div>
 </template>
-
 <script>
 import TheSidebar from './TheSidebar'
 import TheHeader from './TheHeader'

@@ -1,16 +1,28 @@
 <template>
-<div>
-  <h1>Hello from container</h1>
-  <router-view></router-view>
-</div>
+  <div class="app-wrapper d-flex flex-column min-vh-100">
+    <NavBar/>
+    <div class="container-fluid">
+      <router-view></router-view>
+    </div>
+    <Footer class="mt-auto"/>
+  </div>
 </template>
 
 <script>
+import NavBar from './NavBar'
+import Footer from './Footer'
+
 export default {
-  name: "CinemaContainer"
+  components: {
+    NavBar,
+    Footer
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.app-wrapper {
+  background-color: rgb(52, 52, 52);
+}
 
 </style>

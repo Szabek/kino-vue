@@ -1,5 +1,5 @@
 <template>
-  <div class="c-app flex-row align-items-center">
+  <div class="pt-5">
     <CContainer>
       <CRow class="justify-content-center">
         <CCol md="8">
@@ -37,7 +37,7 @@
                     </ValidationProvider>
                     <CRow>
                       <CCol col="6" class="text-left">
-                        <CButton type="submit" color="primary" class="px-4">Login</CButton>
+                        <CButton type="submit" color="dark" class="px-4">Login</CButton>
                       </CCol>
                       <CCol col="6" class="text-right">
                         <CButton color="link" class="px-0">Forgot password?</CButton>
@@ -49,7 +49,7 @@
               </CCardBody>
             </CCard>
             <CCard
-                color="primary"
+                color="dark"
                 text-color="white"
                 class="text-center py-5 d-md-down-none"
                 body-wrapper
@@ -59,13 +59,13 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
                   et dolore magna aliqua.</p>
                 <router-link :to="{ name: 'Register-user' }">
-                <CButton
-                    color="light"
-                    variant="outline"
-                    size="lg"
-                >
-                  Register Now!
-                </CButton>
+                  <CButton
+                      color="light"
+                      variant="outline"
+                      size="lg"
+                  >
+                    Register Now!
+                  </CButton>
                 </router-link>
               </CCardBody>
             </CCard>
@@ -93,7 +93,7 @@ export default {
             password: this.password
           })
           .then(() => {
-            this.$router.push({name: 'Register-user'})
+            this.$router.push({name: 'Main'})
           })
           .catch(err => {
             this.error = err.response.data.error
@@ -102,3 +102,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>
