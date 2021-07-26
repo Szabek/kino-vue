@@ -2,7 +2,7 @@
   <div>
     <b-navbar class="navbar" toggleable="md" type="dark">
 
-      <b-navbar-brand href="/" class="nav-logo">
+      <b-navbar-brand href="/" class="nav-logo py-2">
         <h2>Cinema</h2>
       </b-navbar-brand>
 
@@ -52,7 +52,7 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  background-color: rgb(40, 44, 53);
+  background-color: rgb(27, 22, 18);
 }
 
 .nav-logo > h2 {
@@ -63,9 +63,12 @@ export default {
   color: rgb(255, 140, 0);
   font-weight: bold;
   font-size: 16px;
+  padding-left: 5px;
+  padding-right: 5px;
 
   &:hover {
     color: rgb(250, 250, 250);
+    transition: 0.2s;
   }
 }
 
