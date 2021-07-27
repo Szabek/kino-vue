@@ -81,14 +81,14 @@ function configRoutes() {
         },
         {
             path: '/',
-            redirect: {name: "Sample"},
+            redirect: {name: "Cinema-home"},
             name: 'Main',
             component: () => import('@/views/user/containers/CinemaContainer'),
             children: [
                 {
-                    path: '/sample',
-                    name: 'Sample',
-                    component: () => import('@/views/user/SampleView')
+                    path: '/home',
+                    name: 'Cinema-home',
+                    component: () => import('@/views/user/CinemaDashboard')
                 },
                 {
                     path: '/login-user',
