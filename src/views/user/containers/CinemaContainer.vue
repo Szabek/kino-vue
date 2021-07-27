@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper d-flex flex-column min-vh-100">
     <NavBar/>
-    <div class="container-fluid">
+    <div class="container">
       <router-view></router-view>
     </div>
     <Footer class="mt-auto"/>
@@ -22,7 +22,8 @@ export default {
 
 <style lang="scss" scoped>
 .app-wrapper {
-  background-color: rgb(52, 52, 52);
+  //background-color: rgb(52, 52, 52);
+  background-color: #F5F5F5;
 }
 
 </style>

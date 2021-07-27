@@ -5,8 +5,8 @@ import router from "@/router";
 axios.defaults.baseURL = 'http://localhost:8000/api';
 
 axios.interceptors.request.use(function (config) {
-    const userString = localStorage.getItem('user');
-    userString ? config.headers.common['Authorization'] = 'Bearer ' + JSON.parse(userString).access_token : false;
+    const adminString = localStorage.getItem('admin');
+    adminString ? config.headers.common['Authorization'] = 'Bearer ' + JSON.parse(adminString).access_token : false;
 
     return config
 })
@@ -16,7 +16,7 @@ axios.interceptors.response.use(
     error => {
         switch (error.response.status) {
             case 401:
-                store.dispatch('auth/logout')
+                store.dispatch('authAdmin/logout')
                 break;
             case 404:
                 router.push({name: 'Page404'})
