@@ -1,13 +1,8 @@
 <template>
 <div>
   {{this.getDayOfWeek(getCurrentDay)}}
-  {{this.getDayOfWeek(getCurrentDay + 1)}}
-  {{this.getDayOfWeek(getCurrentDay + 2)}}
-  <ScreeningCard/>
-  <ScreeningCard/>
-  <ScreeningCard/>
-  <ScreeningCard/>
-  <ScreeningCard/>
+  <ScreeningCard v-for="screening in screenings" :key="screening.id" :screening="screening"/>
+
   <div>
 
   </div>
@@ -16,6 +11,8 @@
 
 <script>
 import ScreeningCard from '@/components/cinema/ScreeningCard'
+import {mapActions, mapState} from "vuex";
+import store from '@/store/index'
 
 export default {
   components: {
@@ -25,7 +22,11 @@ export default {
     getCurrentDay() {
       const date = new Date();
       return date.getDay().toLocaleString()
-    }
+    },
+    ...mapState('screening', ['screenings']),
+  },
+  created() {
+    store.dispatch('screening/fetchScreeningsByDate', {date: '2021-07-27'})
   },
   methods: {
     getDayOfWeek(dayNumber) {
@@ -40,10 +41,9 @@ export default {
 
       return weekday[dayNumber];
     },
-    getNextDays(firstDayNumber) {
-
-    }
+    ...mapActions('screening', ['fetchScreeningsByDate']),
   }
+
 }
 </script>
 

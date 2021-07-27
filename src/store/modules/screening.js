@@ -41,6 +41,12 @@ export const actions = {
                 commit('SET_SCREENINGS_LAST_PAGE', response.data.meta.last_page)
             })
     },
+    fetchScreeningsByDate({commit}, {date}) {
+        return screeningApi.getScreeningByDate(date)
+            .then(response => {
+                commit('SET_SCREENINGS', response.data.data)
+            })
+    },
     fetchScreening({commit}, id) {
         return screeningApi.getScreening(id)
             .then(response => {
