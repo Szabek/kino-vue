@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card img-left class="mb-3 w-75 mx-auto">
+    <b-card img-left class="screening-card mb-3 mx-auto">
       <b-row>
         <b-col>
           <a>
@@ -29,7 +29,9 @@
             {{screening.movie.description}}
           </article>
           <div class="pt-3">
-            <b-button class="screening-card-button">14:20</b-button>
+            <b-button class="screening-card-button" v-for="screening  in screenings" :key="screening.id">
+              {{ getTime(screening.start_time) }}
+            </b-button>
           </div>
         </b-col>
         <b-col cols="0" lg="2">
@@ -44,8 +46,8 @@ import {STORAGE_URL} from "@/constants";
 
 export default {
   props: {
-    screening: {
-      type: Object,
+    screenings: {
+      type: Array,
       required: true
     }
   },
@@ -55,10 +57,24 @@ export default {
       modalShow: false
     }
   },
+  computed: {
+    screening() {
+      return this.screenings[0]
+    }
+  },
+  methods: {
+    getTime(dateTime) {
+      const date = new Date(dateTime)
+      return date.toLocaleTimeString([], {timeStyle: 'short'});
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+
+
+
 .screening-card-button {
   background-color: rgb(255, 140, 0);
   color: rgb(10, 10, 10);
@@ -80,6 +96,12 @@ export default {
   &:hover {
     border-radius: 50%;
     background-color: rgba(40, 40, 40, 0.5);
+  }
+}
+
+@media (max-width: 767px) {
+  .screening-card {
+    width: 100%;
   }
 }
 </style>

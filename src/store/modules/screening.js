@@ -5,6 +5,7 @@ export const namespaced = true
 
 export const state = {
     screenings: [],
+    groupedScreenings: [],
     lastPage: 1
 }
 
@@ -14,6 +15,9 @@ export const mutations = {
     },
     SET_SCREENINGS(state, screenings) {
         state.screenings = screenings
+    },
+    SET_GROUPED_SCREENINGS(state, groupedScreenings) {
+        state.groupedScreenings = groupedScreenings
     },
     SET_SCREENINGS_LAST_PAGE(state, lastPage) {
         state.lastPage = lastPage
@@ -41,10 +45,10 @@ export const actions = {
                 commit('SET_SCREENINGS_LAST_PAGE', response.data.meta.last_page)
             })
     },
-    fetchScreeningsByDate({commit}, {date}) {
+    fetchScreeningsGrouped({commit}, {date}) {
         return screeningApi.getScreeningByDate(date)
             .then(response => {
-                commit('SET_SCREENINGS', response.data.data)
+                commit('SET_GROUPED_SCREENINGS', response.data)
             })
     },
     fetchScreening({commit}, id) {
