@@ -28,7 +28,7 @@
         </b-nav-item>
       </b-nav>
     </div>
-    <hr>
+    <hr class="screening-list-hr">
     <div class="pb-3">
       <span class="screening-list-title">Cinema repertoire </span>
       <span>{{ activeDate }}</span>
@@ -134,6 +134,10 @@ export default {
 
 .screening-list-title {
   font-size: 22px;
+}
+
+.screening-list-hr {
+  background-color: rgb(255, 140, 0);
 }
 
 .lds-circle {

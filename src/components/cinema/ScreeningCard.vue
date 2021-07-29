@@ -32,7 +32,7 @@
             <b-button
                 class="screening-card-button"
                 v-for="screening  in screenings" :key="screening.id"
-                @click="pickScreening(screening.id)">
+                :to="{name: 'Reservation-create', params: { id: screening.id}}">
               {{ getTime(screening.start_time) }}
             </b-button>
           </div>
@@ -69,9 +69,6 @@ export default {
     getTime(dateTime) {
       const date = new Date(dateTime)
       return date.toLocaleTimeString([], {timeStyle: 'short'});
-    },
-    pickScreening(screeningId) {
-      console.log(screeningId)
     }
   }
 }
