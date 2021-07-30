@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import MovieShow from "@/components/adminPanel/movie/MovieShow";
+import MovieShow from "@/components/admin/MovieShow";
 
 export default {
   components: {

@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import ScreeningEdit from "@/components/adminPanel/screening/ScreeningEdit";
-import ScreeningShow from "@/components/adminPanel/screening/ScreeningShow";
+import ScreeningEdit from "@/components/admin/ScreeningEdit";
+import ScreeningShow from "@/components/admin/ScreeningShow";
 import {mapActions} from "vuex";
 
 export default {

@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import CategoryList from "@/components/adminPanel/category/CategoryList";
-import CategoryCreate from "@/components/adminPanel/category/CategoryCreate";
+import CategoryList from "@/components/admin/CategoryList";
+import CategoryCreate from "@/components/admin/CategoryCreate";
 
 export default {
   components: {

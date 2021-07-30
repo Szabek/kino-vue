@@ -10,7 +10,7 @@
         {{screening.movie.description}}
       </b-card-text>
       <template #footer>
-        <small class="text-muted">{{screening.movie.author}}</small>
+        <small class="text-muted">Author: {{screening.movie.author}}</small>
       </template>
     </b-card>
   </div>
@@ -28,9 +28,9 @@ export default {
   },
   data() {
     return {
-      STORAGE_URL: STORAGE_URL
+      STORAGE_URL: STORAGE_URL,
     }
-  },
+  }
 }
 </script>
 
