@@ -1,24 +1,24 @@
 <template>
-  <CContainer v-if="screening">
-    <CRow>
-      <CCol class="col-12 col-xl-6">
+  <b-container >
+    <b-row v-if="screening">
+      <b-col md="4">
         <ScreeningShow :screening="screening"/>
-      </CCol>
-      <CCol class="col-12 col-xl-6">
-        <ScreeningEdit :screening="screening"/>
-      </CCol>
-    </CRow>
-  </CContainer>
+      </b-col>
+      <b-col>
+        <ReservationForm :screening="screening"/>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
-import ScreeningEdit from "@/components/admin/ScreeningEdit";
-import ScreeningShow from "@/components/admin/ScreeningShow";
 import {mapActions} from "vuex";
+import ReservationForm from '@/components/cinema/ReservationForm'
+import ScreeningShow from '@/components/cinema/ScreeningShow'
 
 export default {
   components: {
-    ScreeningEdit,
+    ReservationForm,
     ScreeningShow
   },
   props: {
@@ -37,7 +37,7 @@ export default {
     ])
   },
   created() {
-    if (!this.$store.state["screening/screenings"]) {
+    if (!this.screening) {
       this.fetchScreening(this.id)
     }
   }

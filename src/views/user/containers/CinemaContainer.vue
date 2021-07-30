@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .app-wrapper {
   //background-color: rgb(52, 52, 52);
   background-color: #F5F5F5;

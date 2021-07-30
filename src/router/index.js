@@ -100,6 +100,13 @@ function configRoutes() {
                     name: 'Register-user',
                     component: () => import('@/views/user/auth/RegisterUser')
                 },
+                {
+                    path: '/create-reservation/:id',
+                    name: 'Reservation-create',
+                    component: () => import('@/views/user/ReservationCreate'),
+                    props: true,
+                    meta: {isUser: true}
+                },
             ]
         }
     ]
