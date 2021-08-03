@@ -1,6 +1,5 @@
 import * as screeningApi from '@/api/screenings'
 
-
 export const namespaced = true
 
 export const state = {
@@ -50,6 +49,7 @@ export const actions = {
             .then(response => {
                 commit('SET_GROUPED_SCREENINGS', response.data)
             })
+
     },
     fetchScreening({commit}, id) {
         return screeningApi.getScreening(id)

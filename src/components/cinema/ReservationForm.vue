@@ -13,17 +13,23 @@
                          class="mt-3"></b-form-select>
         </div>
         <div class="pt-3 pl-3">
-          <p>Total price: <span class="reservation-form-price">{{ form.total_price }}$</span></p>
-
+          <p>Total price: <span class="reservation-form-price">{{ total_price }}$</span></p>
         </div>
         <hr class="reservation-form-hr">
         <div class="d-flex">
           <b-button
+              v-if="screening.available_seats > 0"
               class="reservation-form-button"
               size="lg"
+              @click.prevent="orderReservation"
           >
             Order
           </b-button>
+          <div
+              v-if="screening.available_seats === 0"
+              class="reservation-form-alert alert-danger">
+            Tickets sold out!
+          </div>
         </div>
       </b-form>
     </div>
@@ -43,11 +49,11 @@ export default {
   data() {
     return {
       form: {
-        userId: '',
-        screeningId: '',
+        user_id: '',
+        screening_id: '',
         seats: '',
-        total_price: ''
-      }
+      },
+      total_price: ''
     }
   },
   computed: {
@@ -61,7 +67,7 @@ export default {
   watch: {
     'form.seats': function (newValue) {
       if (newValue) {
-        this.form.total_price = this.form.seats * this.screening.price
+        this.total_price = this.form.seats * this.screening.price
       }
     }
   },
@@ -70,16 +76,21 @@ export default {
   },
   methods: {
     createReservationObject() {
-      this.form.userId = this.user.user.id
-      this.form.screeningId = this.screening.id
+      this.form.user_id = this.user.user.id
+      this.form.screening_id = this.screening.id
       this.form.seats = 1
-      this.form.total_price = this.screening.price
+      this.total_price = this.screening.price
+    },
+    orderReservation() {
+      this.$store.dispatch("reservation/createReservations",
+          {reservation: this.form})
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import 'src/assets/scss/style';
 
 .reservation-form-hr {
   background-color: rgb(255, 140, 0);
@@ -101,6 +112,11 @@ export default {
 .reservation-form-price {
   color: rgb(255, 140, 0);
   font-weight: bold;
+}
+
+.reservation-form-alert {
+  margin: auto;
+  font-size: 18px;
 }
 
 </style>

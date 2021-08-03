@@ -5,9 +5,13 @@ import router from "@/router";
 axios.defaults.baseURL = 'http://localhost:8000/api';
 
 axios.interceptors.request.use(function (config) {
+    if (localStorage.getItem('user') != null) {
+        const userString = localStorage.getItem('user');
+        userString ? config.headers.common['Authorization'] = 'Bearer ' + JSON.parse(userString).access_token : false;
+        return config
+    }
     const adminString = localStorage.getItem('admin');
     adminString ? config.headers.common['Authorization'] = 'Bearer ' + JSON.parse(adminString).access_token : false;
-
     return config
 })
 
