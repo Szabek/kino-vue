@@ -6,6 +6,7 @@ import * as category from '@/store/modules/category'
 import * as movie from '@/store/modules/movie'
 import * as room from '@/store/modules/room'
 import * as screening from '@/store/modules/screening'
+import * as reservation from  '@/store/modules/reservation'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
         category,
         movie,
         room,
-        screening
+        screening,
+        reservation
     },
 
     state: {

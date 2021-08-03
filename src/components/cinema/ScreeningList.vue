@@ -34,7 +34,9 @@
       <span>{{ activeDate }}</span>
     </div>
     <div v-if="groupedScreenings.length === 0" class="lds-circle"><div></div></div>
-    <ScreeningCard v-for="screenings in groupedScreenings" :key="screenings.id" :screenings="screenings"/>
+    <div v-if="groupedScreenings">
+      <ScreeningCard v-for="screenings in groupedScreenings" :key="screenings.id" :screenings="screenings"/>
+    </div>
   </div>
 </template>
 
@@ -51,7 +53,7 @@ export default {
     return {
       nextDays: [],
       activeDay: 0,
-      activeDate: ''
+      activeDate: '',
     }
   },
   computed: {
