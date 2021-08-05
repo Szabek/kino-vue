@@ -107,6 +107,12 @@ function configRoutes() {
                     props: true,
                     meta: {isUser: true}
                 },
+                {
+                    path: '/user-profile',
+                    name: 'User-profile',
+                    component: () => import('@/views/user/UserProfile'),
+                    meta: {isUser: true}
+                },
             ]
         }
     ]
