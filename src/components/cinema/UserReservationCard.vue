@@ -1,22 +1,30 @@
 <template>
 <b-card class="mt-3">
-  <h1>Szeregowiec Ryan</h1>
+  <h1>{{reservation.screening.movie.title}}</h1>
   <div >
-    02-20-2021
-    <b-button class="reservation-card-confirm">Confirm</b-button>
+    {{reservation.screening.start_time}}
+    <div v-if="reservation.is_paid === 0">
+      <b-button class="reservation-card-confirm-button">Confirm Reservation</b-button>
+    </div>
+    <span v-if="reservation.is_paid === 1" class="reservation-card-confirmed">Reservation confirmed</span>
   </div>
 </b-card>
 </template>
 
 <script>
 export default {
-  name: "UserReservationCard"
+  props: {
+    reservation: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 
-.reservation-card-confirm {
+.reservation-card-confirm-button {
   margin-left: 50%;
   background-color: rgb(255, 140, 0);
   color: rgb(10, 10, 10);
@@ -28,6 +36,13 @@ export default {
    transition: 0.3s;
    background-color: rgb(125, 72, 0);
  }
+}
+
+.reservation-card-confirmed {
+  margin-left: 40%;
+  color: rgb(255, 140, 0);
+  font-weight: bold;
+  font-size: 20px;
 }
 
 </style>

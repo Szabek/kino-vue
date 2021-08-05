@@ -1,6 +1,6 @@
 <template>
 <div>
-  <UserReservationCard/>
+  <UserReservationCard v-for="reservation in reservations" :key="reservation.id" :reservation="reservation"/>
 </div>
 </template>
 
@@ -10,6 +10,11 @@ import UserReservationCard from '@/components/cinema/UserReservationCard'
 export default {
   components: {
     UserReservationCard
+  },
+  props: {
+    reservations: {
+      required: true
+    }
   }
 }
 </script>

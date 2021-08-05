@@ -22,6 +22,12 @@ export const actions = {
                 commit('ADD_RESERVATION', response.data.data)
             })
     },
+    fetchReservations({commit}) {
+        return reservationApi.getReservations()
+            .then(response => {
+                commit('SET_RESERVATIONS', response.data.data)
+            })
+    },
 
 }
 
